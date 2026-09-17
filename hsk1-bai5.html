@@ -179,6 +179,20 @@
             font-style: italic;
         }
 
+        .match-box {
+            background: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .match-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
         .result-box {
             display: none;
             background: #EBF8FF;
@@ -290,6 +304,27 @@
             </div>
         </div>
 
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 Phần 2</div>
+        <p><strong>第4—5题：听句子，判断对错。每题听两次。</strong><br>
+        <span class="vi-text">Câu 4–5: Nghe và chọn Đúng (√) hoặc Sai (×). Mỗi câu nghe hai lần.</span></p>
+
+        <div class="question-card" id="card-q4">
+            <div><span class="q-number">4.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q4" value="V"> Đúng (√)</label>
+                <label class="option-label"><input type="radio" name="q4" value="X"> Sai (×)</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q5">
+            <div><span class="q-number">5.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q5" value="V"> Đúng (√)</label>
+                <label class="option-label"><input type="radio" name="q5" value="X"> Sai (×)</label>
+            </div>
+        </div>
+
         <!-- 第三部分 -->
         <div class="part-title">第三部分 Phần 3</div>
         <p><strong>第6—8题：听对话，选择最匹配的图片。每题听两次。</strong><br>
@@ -312,6 +347,29 @@
 
         <div class="question-card" id="card-q8">
             <div><span class="q-number">8.</span> Chọn hình tương ứng: <input type="text" class="fill-input" id="q8" maxlength="1"></div>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="part-title">第四部分 Phần 4</div>
+        <p><strong>第9—10题：听对话，选择正确答案。每题听两次。</strong><br>
+        <span class="vi-text">Câu 9–10: Nghe hội thoại và chọn đáp án đúng. Mỗi câu nghe hai lần.</span></p>
+
+        <div class="question-card" id="card-q9">
+            <div><span class="q-number">9.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q9" value="A"> A. 星期一</label>
+                <label class="option-label"><input type="radio" name="q9" value="B"> B. 星期三</label>
+                <label class="option-label"><input type="radio" name="q9" value="C"> C. 星期五</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q10">
+            <div><span class="q-number">10.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q10" value="A"> A. 8月5号</label>
+                <label class="option-label"><input type="radio" name="q10" value="B"> B. 8月15号</label>
+                <label class="option-label"><input type="radio" name="q10" value="C"> C. 8月25号</label>
+            </div>
         </div>
 
         <!-- ==================== 二、阅读 ==================== -->
@@ -344,6 +402,114 @@
             <div>Nhập hình tương ứng (A, B, C, D): <input type="text" class="fill-input" id="q13" maxlength="1"></div>
         </div>
 
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 Phần 2</div>
+        <p><strong>第14—16题：匹配句子。</strong><br>
+        <span class="vi-text">Câu 14–16: Nối câu (chọn đáp án A, B, C, D ghép với câu hỏi tương ứng).</span></p>
+
+        <div class="match-box">
+            <p><strong>Các vế đáp án để chọn:</strong></p>
+            <div class="match-options">
+                <div><strong>A.</strong> <span class="pinyin">Hǎo de, xièxie!</span><br>好的，谢谢！</div>
+                <div><strong>B.</strong> <span class="pinyin">Wǒ bú huì.</span><br>我不会。</div>
+                <div><strong>C.</strong> <span class="pinyin">Miàntiáor.</span><br>面条儿。</div>
+                <div><strong>D.</strong> <span class="pinyin">5 yuè 6 hào.</span><br>5月6号。</div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div class="pinyin">Nǐ hē shuǐ ma?</div>
+            <div>你喝水吗？ (Bạn có uống nước không?)</div>
+            <div>Đáp án: <strong>A</strong> (好的，谢谢！)</div>
+        </div>
+
+        <div class="question-card" id="card-q14">
+            <div><span class="q-number">14.</span> <span class="pinyin">Nǐ qù chāoshì mǎi shénme?</span></div>
+            <div>你去超市买什么？<span class="vi-text">(Bạn đi siêu thị mua gì?)</span></div>
+            <div style="margin-top:8px;">Chọn đáp án (A, B, C, D): <input type="text" class="fill-input" id="q14" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q15">
+            <div><span class="q-number">15.</span> <span class="pinyin">Nǐ huì zuò fàn ma?</span></div>
+            <div>你会做饭吗？<span class="vi-text">(Bạn biết nấu ăn không?)</span></div>
+            <div style="margin-top:8px;">Chọn đáp án (A, B, C, D): <input type="text" class="fill-input" id="q15" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q16">
+            <div><span class="q-number">16.</span> <span class="pinyin">Jīntiān jǐ hào?</span></div>
+            <div>今天几号？<span class="vi-text">(Hôm nay ngày mấy?)</span></div>
+            <div style="margin-top:8px;">Chọn đáp án (A, B, C, D): <input type="text" class="fill-input" id="q16" maxlength="1"></div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分 Phần 3</div>
+        <p><strong>第17—18题：选词填空。</strong><br>
+        <span class="vi-text">Câu 17–18: Chọn từ thích hợp điền vào chỗ trống.</span></p>
+
+        <div class="match-box">
+            <p><strong>Các từ để chọn:</strong></p>
+            <div class="match-options">
+                <div><strong>A.</strong> <span class="pinyin">jǐ</span> 几</div>
+                <div><strong>B.</strong> <span class="pinyin">hǎokàn</span> 好看</div>
+                <div><strong>C.</strong> <span class="pinyin">míngzi</span> 名字</div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div class="pinyin">Nǐ jiào shénme ( C )?</div>
+            <div>你叫什么（ C ）？ (Bạn tên là gì?)</div>
+        </div>
+
+        <div class="question-card" id="card-q17">
+            <div><span class="q-number">17.</span> <span class="pinyin">Jīntiān ( &nbsp;&nbsp; ) hào?</span></div>
+            <div>今天（ <input type="text" class="fill-input" id="q17" maxlength="1"> ）号？</div>
+        </div>
+
+        <div class="question-card" id="card-q18">
+            <div><span class="q-number">18.</span></div>
+            <div><span class="pinyin">Nán: Nǐ de xīn diànnǎo zhēn ( &nbsp;&nbsp; )!</span></div>
+            <div>男：你的新电脑真（ <input type="text" class="fill-input" id="q18" maxlength="1"> ）！</div>
+            <div style="margin-top: 5px;"><span class="pinyin">Nǚ: Xièxie, wǒ yě hěn xǐhuan.</span></div>
+            <div>女：谢谢，也很喜欢。</div>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="part-title">第四部分 Phần 4</div>
+        <p><strong>第19—20题：选择正确答案。</strong><br>
+        <span class="vi-text">Câu 19–20: Chọn đáp án đúng.</span></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div class="pinyin">Qǐngwèn xiànzài jǐ diǎn le?</div>
+            <div>请问现在几点了？ (Xin hỏi bây giờ là mấy giờ rồi?)</div>
+            <div>★ <span class="pinyin">Shuōhuàrén xiǎng zhīdào shénme?</span> (Người nói muốn biết điều gì?)</div>
+            <div>A. 时间 √ &nbsp;&nbsp;&nbsp;&nbsp; B. 名字 &nbsp;&nbsp;&nbsp;&nbsp; C. 房间号</div>
+        </div>
+
+        <div class="question-card" id="card-q19">
+            <div><span class="q-number">19.</span> <span class="pinyin">Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.</span></div>
+            <div>我非常喜欢我的中文名字。</div>
+            <div style="margin-top: 6px; font-weight: bold;">★ <span class="pinyin">Shuōhuàrén xǐhuan shénme?</span> (Người nói thích cái gì?)</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q19" value="A"> A. 新电脑</label>
+                <label class="option-label"><input type="radio" name="q19" value="B"> B. 中国菜</label>
+                <label class="option-label"><input type="radio" name="q19" value="C"> C. 中文名字</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q20">
+            <div><span class="q-number">20.</span> <span class="pinyin">Jīntiān 8 hào, nǐ jǐ hào xiūxi?</span></div>
+            <div>今天8号，你几号休息？</div>
+            <div style="margin-top: 6px; font-weight: bold;">★ <span class="pinyin">Shuōhuàrén xiǎng zhīdào shénme?</span> (Người nói muốn biết điều gì?)</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q20" value="A"> A. 今天几号</label>
+                <label class="option-label"><input type="radio" name="q20" value="B"> B. 哪天休息</label>
+                <label class="option-label"><input type="radio" name="q20" value="C"> C. 星期几上班</label>
+            </div>
+        </div>
+
         <div class="result-box" id="result-box"></div>
 
         <div class="submit-container">
@@ -356,8 +522,13 @@
 function checkAnswers() {
     const answers = {
         q1: 'C', q2: 'A', q3: 'B',
+        q4: 'V', q5: 'X',
         q6: 'C', q7: 'B', q8: 'D',
-        q11: 'D', q12: 'C', q13: 'B'
+        q9: 'B', q10: 'A',
+        q11: 'D', q12: 'C', q13: 'B',
+        q14: 'C', q15: 'B', q16: 'D',
+        q17: 'A', q18: 'B',
+        q19: 'C', q20: 'B'
     };
 
     let score = 0;
