@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bài tập HSK1 (Bài 5) - Tiếng Trung Meow Meow</title>
+    <title>Bài tập HSK1 Bài 5 - Tiếng Trung Meow Meow</title>
     <style>
         :root {
             --primary-color: #4A90E2;
@@ -114,28 +114,27 @@
             margin-right: 8px;
         }
 
-        .img-grid {
+        .image-group {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 10px;
+            margin: 10px 0;
             flex-wrap: wrap;
         }
 
-        .img-card {
+        .img-item {
             text-align: center;
-            background: #FAFAFA;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 10px;
             flex: 1;
-            min-width: 130px;
+            min-width: 120px;
         }
 
-        .img-card svg {
-            width: 100px;
-            height: 100px;
+        .img-item img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
         }
 
         .options-grid {
@@ -158,59 +157,14 @@
             margin-right: 8px;
         }
 
-        .fill-select {
-            padding: 6px 12px;
+        .fill-input {
+            width: 60px;
+            padding: 6px;
             border: 1px solid #CBD5E0;
             border-radius: 4px;
+            text-align: center;
             font-size: 15px;
-            margin: 0 5px;
-            background: #fff;
-        }
-
-        .word-bank-box {
-            background: #EDF2F7;
-            border: 1px solid #CBD5E0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .word-bank-item {
-            text-align: center;
-        }
-
-        .word-bank-item .pinyin {
-            font-size: 13px;
-            color: #4A5568;
-        }
-
-        .word-bank-item .hanzi {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2D3748;
-        }
-
-        .match-box {
-            background: #FFF5F5;
-            border: 1px solid #FEB2B2;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-        }
-
-        .match-item {
-            background: #FFF;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #E2E8F0;
-            text-align: center;
+            margin-left: 10px;
         }
 
         .pinyin {
@@ -261,7 +215,7 @@
 
 <div class="container">
     <header>
-        <h1>bài tập HSK1 (Bài 5)</h1>
+        <h1>Bài tập HSK1 (Bài 5)</h1>
         <div class="subtitle">Tiếng Trung Meow Meow</div>
     </header>
 
@@ -273,6 +227,7 @@
             <strong>🎧 File nghe âm thanh:</strong>
             <audio controls>
                 <source src="5-3.mp3" type="audio/mpeg">
+                Trình duyệt của bạn không hỗ trợ phát file audio.
             </audio>
         </div>
 
@@ -286,24 +241,19 @@
             <div class="pinyin">sān gè píngguǒ</div>
             <div>三个苹果</div>
             <div class="vi-text">ba quả táo ( C √ )</div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=300" alt="Sách"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" alt="Laptop"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300" alt="Táo"><br>C √</div>
+            </div>
         </div>
 
-        <!-- Câu 1 -->
         <div class="question-card" id="card-q1">
             <div><span class="q-number">1.</span></div>
-            <div class="img-grid">
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="15" fill="#4A90E2"/><path d="M 30 80 Q 50 50 70 80" stroke="#4A90E2" stroke-width="8" fill="none"/></svg>
-                    <div><strong>A</strong> (chạy bộ)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="25" y="40" width="50" height="40" rx="5" fill="#E2E8F0" stroke="#3182CE" stroke-width="3"/><path d="M 40 20 L 40 40 M 60 20 L 60 40" stroke="#E53E3E" stroke-width="4"/></svg>
-                    <div><strong>B</strong> (nấu ăn)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><ellipse cx="50" cy="60" rx="35" ry="15" fill="#DD6B20"/><path d="M 20 60 Q 50 10 80 60" fill="#F6AD55"/></svg>
-                    <div><strong>C</strong> (xào nấu)</div>
-                </div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300" alt="Chạy bộ"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=300" alt="Đọc sách"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=300" alt="Nấu ăn"><br>C</div>
             </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q1" value="A"> A</label>
@@ -312,22 +262,12 @@
             </div>
         </div>
 
-        <!-- Câu 2 -->
         <div class="question-card" id="card-q2">
             <div><span class="q-number">2.</span></div>
-            <div class="img-grid">
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="35" y="20" width="30" height="60" fill="#319795"/><path d="M 50 35 L 50 65 M 35 50 L 65 50" stroke="#FFF" stroke-width="6"/></svg>
-                    <div><strong>A</strong> (y tế)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><circle cx="35" cy="40" r="12" fill="#D69E2E"/><circle cx="65" cy="40" r="12" fill="#3182CE"/><path d="M 20 80 Q 50 50 80 80" stroke="#4A5568" stroke-width="4" fill="none"/></svg>
-                    <div><strong>B</strong> (học nhóm)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" fill="#805AD5"/><circle cx="50" cy="50" r="10" fill="#FFF"/></svg>
-                    <div><strong>C</strong> (họp hành)</div>
-                </div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300" alt="Bác sĩ khám bệnh"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=300" alt="Dạy học / Ngồi học"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=300" alt="Trò chuyện bàn ăn"><br>C</div>
             </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q2" value="A"> A</label>
@@ -336,22 +276,12 @@
             </div>
         </div>
 
-        <!-- Câu 3 -->
         <div class="question-card" id="card-q3">
             <div><span class="q-number">3.</span></div>
-            <div class="img-grid">
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="30" text-anchor="middle" fill="#3182CE" font-weight="bold">3号</text></svg>
-                    <div><strong>A</strong> (ngày 3)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="26" text-anchor="middle" fill="#3182CE" font-weight="bold">12号</text></svg>
-                    <div><strong>B</strong> (ngày 12)</div>
-                </div>
-                <div class="img-card">
-                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="26" text-anchor="middle" fill="#3182CE" font-weight="bold">21号</text></svg>
-                    <div><strong>C</strong> (ngày 21)</div>
-                </div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=300" alt="Lịch số 3"><br>A (3号)</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=300" alt="Lịch số 12"><br>B (12号)</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=300" alt="Lịch số 21"><br>C (21号)</div>
             </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q3" value="A"> A</label>
@@ -360,122 +290,28 @@
             </div>
         </div>
 
-        <!-- 第二部分 -->
-        <div class="part-title">第二部分 Phần 2</div>
-        <p><strong>第4—5题：听问题，选择正确回答。每题听两次。</strong><br>
-        <span class="vi-text">Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng. Mỗi câu nghe hai lần.</span></p>
-
-        <div class="example-box">
-            <div class="example-title">例如：</div>
-            <div class="pinyin">Jīntiān tiānqì zěnmeyàng?</div>
-            <div>今天天气怎么样？</div>
-            <div class="vi-text">Hôm nay thời tiết thế nào?</div>
-            <div class="options-grid" style="margin-top: 5px;">
-                <div>A 非常热 √ (rất nóng)</div>
-                <div>B 很好听 (nghe rất hay)</div>
-                <div>C 在喝水 (đang uống nước)</div>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q4">
-            <div><span class="q-number">4.</span></div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q4" value="A"> A 我不会 (wǒ bú huì)</label>
-                <label class="option-label"><input type="radio" name="q4" value="B"> B 我吃饺子 (wǒ chī jiǎozi)</label>
-                <label class="option-label"><input type="radio" name="q4" value="C"> C 做面条儿 (zuò miàntiáor)</label>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q5">
-            <div><span class="q-number">5.</span></div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q5" value="A"> A 休息 (xiūxi)</label>
-                <label class="option-label"><input type="radio" name="q5" value="B"> B 星期四 (Xīngqīsì)</label>
-                <label class="option-label"><input type="radio" name="q5" value="C"> C 五口人 (wǔ kǒu rén)</label>
-            </div>
-        </div>
-
         <!-- 第三部分 -->
         <div class="part-title">第三部分 Phần 3</div>
         <p><strong>第6—8题：听对话，选择最匹配的图片。每题听两次。</strong><br>
         <span class="vi-text">Câu 6–8: Nghe và chọn hình ảnh phù hợp nhất với hội thoại nghe được. Mỗi câu nghe hai lần.</span></p>
 
-        <div class="img-grid">
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><circle cx="35" cy="40" r="10" fill="#3182CE"/><circle cx="65" cy="40" r="10" fill="#E53E3E"/><path d="M 35 60 L 65 60" stroke="#3182CE" stroke-width="4"/></svg>
-                <div><strong>A</strong> (bắt tay)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><rect x="25" y="20" width="50" height="60" fill="#FAF5FF" stroke="#9F7AEA" stroke-width="3"/><text x="50" y="55" font-size="16" text-anchor="middle" fill="#6B46C1">CALENDAR</text></svg>
-                <div><strong>B</strong> (xem lịch)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#FEFCBF" stroke="#D69E2E" stroke-width="3"/><path d="M 35 50 Q 50 30 65 50" stroke="#D69E2E" stroke-width="4" fill="none"/></svg>
-                <div><strong>C</strong> (món ăn)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" rx="3" fill="#E2E8F0" stroke="#4A5568" stroke-width="3"/><path d="M 15 70 L 85 70" stroke="#4A5568" stroke-width="4"/></svg>
-                <div><strong>D</strong> (máy tính)</div>
-            </div>
+        <div class="image-group">
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300" alt="Bắt tay"><br>A</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=300" alt="Tờ lịch tháng 6"><br>B</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300" alt="Món ăn xào tôm"><br>C</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" alt="Laptop"><br>D</div>
         </div>
 
         <div class="question-card" id="card-q6">
-            <div><span class="q-number">6.</span> Chọn hình tương ứng: 
-                <select class="fill-select" id="q6">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
+            <div><span class="q-number">6.</span> Chọn hình tương ứng: <input type="text" class="fill-input" id="q6" maxlength="1"></div>
         </div>
 
         <div class="question-card" id="card-q7">
-            <div><span class="q-number">7.</span> Chọn hình tương ứng: 
-                <select class="fill-select" id="q7">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
+            <div><span class="q-number">7.</span> Chọn hình tương ứng: <input type="text" class="fill-input" id="q7" maxlength="1"></div>
         </div>
 
         <div class="question-card" id="card-q8">
-            <div><span class="q-number">8.</span> Chọn hình tương ứng: 
-                <select class="fill-select" id="q8">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- 第四部分 -->
-        <div class="part-title">第四部分 Phần 4</div>
-        <p><strong>第9—10题：听句子和问题，选择正确答案。每题听两次。</strong><br>
-        <span class="vi-text">Câu 9–10: Nghe và chọn đáp án đúng. Mỗi câu nghe hai lần.</span></p>
-
-        <div class="question-card" id="card-q9">
-            <div><span class="q-number">9.</span></div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q9" value="A"> A 菜 (cài)</label>
-                <label class="option-label"><input type="radio" name="q9" value="B"> B 饺子 (jiǎozi)</label>
-                <label class="option-label"><input type="radio" name="q9" value="C"> C 面条儿 (miàntiáor)</label>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q10">
-            <div><span class="q-number">10.</span></div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q10" value="A"> A 4号 (4 hào)</label>
-                <label class="option-label"><input type="radio" name="q10" value="B"> B 10号 (10 hào)</label>
-                <label class="option-label"><input type="radio" name="q10" value="C"> C 14号 (14 hào)</label>
-            </div>
+            <div><span class="q-number">8.</span> Chọn hình tương ứng: <input type="text" class="fill-input" id="q8" maxlength="1"></div>
         </div>
 
         <!-- ==================== 二、阅读 ==================== -->
@@ -486,220 +322,26 @@
         <p><strong>第11—13题：选择与句子最匹配的图片。</strong><br>
         <span class="vi-text">Câu 11–13: Chọn hình ảnh phù hợp nhất với câu.</span></p>
 
-        <div class="img-grid">
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" fill="#EBF8FF" stroke="#3182CE" stroke-width="3"/><path d="M 35 35 L 65 35 M 35 50 L 65 50 M 35 65 L 55 65" stroke="#3182CE" stroke-width="2"/></svg>
-                <div><strong>A</strong> (sách)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><path d="M 20 80 L 80 80 M 30 75 L 70 30" stroke="#2D3748" stroke-width="4"/></svg>
-                <div><strong>B</strong> (viết bài)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><rect x="20" y="50" width="60" height="25" fill="#CBD5E0"/><circle cx="35" cy="40" r="10" fill="#4A5568"/></svg>
-                <div><strong>C</strong> (nằm nghỉ)</div>
-            </div>
-            <div class="img-card">
-                <svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="15" fill="#ED8936"/><path d="M 50 50 L 70 30 M 50 50 L 30 70" stroke="#ED8936" stroke-width="5"/></svg>
-                <div><strong>D</strong> (vẫy tay chào)</div>
-            </div>
+        <div class="image-group">
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300" alt="Cô giáo"><br>A</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300" alt="Bé trai ngồi viết bài"><br>B</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=300" alt="Người nằm ngủ nghỉ ngơi"><br>C</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=300" alt="Vẫy tay chào tạm biệt"><br>D</div>
         </div>
 
         <div class="question-card" id="card-q11">
-            <div class="pinyin">Wáng lǎoshī, zàijiàn.</div>
-            <div><span class="q-number">11.</span> 王老师，再见。</div>
-            <div style="margin-top: 8px;">Chọn đáp án: 
-                <select class="fill-select" id="q11">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
+            <div><span class="q-number">11.</span> 王老师，再见。(Wáng lǎoshī, zàijiàn.)</div>
+            <div>Nhập hình tương ứng (A, B, C, D): <input type="text" class="fill-input" id="q11" maxlength="1"></div>
         </div>
 
         <div class="question-card" id="card-q12">
-            <div class="pinyin">Jīntiān wǒ xiūxi.</div>
-            <div><span class="q-number">12.</span> 今天我休息。</div>
-            <div style="margin-top: 8px;">Chọn đáp án: 
-                <select class="fill-select" id="q12">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
+            <div><span class="q-number">12.</span> 今天我休息。(Jīntiān wǒ xiūxi.)</div>
+            <div>Nhập hình tương ứng (A, B, C, D): <input type="text" class="fill-input" id="q12" maxlength="1"></div>
         </div>
 
         <div class="question-card" id="card-q13">
-            <div class="pinyin">Wǒ yǒu yí gè érzi, tā jīnnián 7 suì.</div>
-            <div><span class="q-number">13.</span> 我有一个儿子，他今年7岁。</div>
-            <div style="margin-top: 8px;">Chọn đáp án: 
-                <select class="fill-select" id="q13">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- 第二部分 -->
-        <div class="part-title">第二部分 Phần 2</div>
-        <p><strong>第14—16题：匹配句子。</strong><br>
-        <span class="vi-text">Câu 14–16: Nối câu (Chọn vế trả lời A, B, C, D phù hợp với câu hỏi).</span></p>
-
-        <div class="match-box">
-            <div class="match-item">
-                <div class="pinyin">Hǎo de, xièxie!</div>
-                <div style="font-weight: bold;">A 好的，谢谢！</div>
-            </div>
-            <div class="match-item">
-                <div class="pinyin">Wǒ bú huì.</div>
-                <div style="font-weight: bold;">B 我不会。</div>
-            </div>
-            <div class="match-item">
-                <div class="pinyin">Miàntiáor.</div>
-                <div style="font-weight: bold;">C 面条儿。</div>
-            </div>
-            <div class="match-item">
-                <div class="pinyin">5 yuè 6 hào.</div>
-                <div style="font-weight: bold;">D 5月6号。</div>
-            </div>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">例如：</div>
-            <div class="pinyin">Nǐ hē shuǐ ma?</div>
-            <div>你喝水吗？ ➔ <strong>( A )</strong></div>
-            <div class="vi-text">Bạn có uống nước không? ➔ A 好的，谢谢！</div>
-        </div>
-
-        <div class="question-card" id="card-q14">
-            <div class="pinyin">Nǐ qù chāoshì mǎi shénme?</div>
-            <div><span class="q-number">14.</span> 你去超市买什么？</div>
-            <div style="margin-top: 8px;">Nối với đáp án: 
-                <select class="fill-select" id="q14">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A 好的，谢谢！</option>
-                    <option value="B">B 我不会。</option>
-                    <option value="C">C 面条儿。</option>
-                    <option value="D">D 5月6号。</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q15">
-            <div class="pinyin">Nǐ huì zuò fàn ma?</div>
-            <div><span class="q-number">15.</span> 你会做饭吗？</div>
-            <div style="margin-top: 8px;">Nối với đáp án: 
-                <select class="fill-select" id="q15">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A 好的，谢谢！</option>
-                    <option value="B">B 我不会。</option>
-                    <option value="C">C 面条儿。</option>
-                    <option value="D">D 5月6号。</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q16">
-            <div class="pinyin">Jīntiān jǐ hào?</div>
-            <div><span class="q-number">16.</span> 今天几号？</div>
-            <div style="margin-top: 8px;">Nối với đáp án: 
-                <select class="fill-select" id="q16">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A 好的，谢谢！</option>
-                    <option value="B">B 我不会。</option>
-                    <option value="C">C 面条儿。</option>
-                    <option value="D">D 5月6号。</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- 第三部分 -->
-        <div class="part-title">第三部分 Phần 3</div>
-        <p><strong>第17—18题：选词填空。</strong><br>
-        <span class="vi-text">Câu 17–18: Chọn từ thích hợp điền vào chỗ trống.</span></p>
-
-        <div class="word-bank-box">
-            <div class="word-bank-item">
-                <div class="pinyin">jǐ</div>
-                <div class="hanzi">A 几</div>
-            </div>
-            <div class="word-bank-item">
-                <div class="pinyin">hǎokàn</div>
-                <div class="hanzi">B 好看</div>
-            </div>
-            <div class="word-bank-item">
-                <div class="pinyin">míngzi</div>
-                <div class="hanzi">C 名字</div>
-            </div>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">例如：</div>
-            <div class="pinyin">Nǐ jiào shénme míngzi?</div>
-            <div>你叫什么（ <strong>C</strong> ）？</div>
-            <div class="vi-text">Bạn tên là gì?</div>
-        </div>
-
-        <div class="question-card" id="card-q17">
-            <div class="pinyin">Jīntiān ( ____ ) hào?</div>
-            <div><span class="q-number">17.</span> 今天（ 
-                <select class="fill-select" id="q17">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A 几</option>
-                    <option value="B">B 好看</option>
-                    <option value="C">C 名字</option>
-                </select>
-            ）号？</div>
-        </div>
-
-        <div class="question-card" id="card-q18">
-            <div class="pinyin">Nǐ de xīn diànnǎo zhēn ( ____ )!</div>
-            <div><span class="q-number">18.</span> 男：你的新电脑真（ 
-                <select class="fill-select" id="q18">
-                    <option value="">-- Chọn --</option>
-                    <option value="A">A 几</option>
-                    <option value="B">B 好看</option>
-                    <option value="C">C 名字</option>
-                </select>
-            ）！</div>
-            <div class="pinyin" style="margin-top: 5px;">Xièxie, wǒ yě hěn xǐhuan.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女：谢谢，我也很喜欢。</div>
-        </div>
-
-        <!-- 第四部分 -->
-        <div class="part-title">第四部分 Phần 4</div>
-        <p><strong>第19—20题：选择正确答案。</strong><br>
-        <span class="vi-text">Câu 19–20: Chọn đáp án đúng.</span></p>
-
-        <div class="question-card" id="card-q19">
-            <div class="pinyin">Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.</div>
-            <div><span class="q-number">19.</span> 我非常喜欢我的中文名字。</div>
-            <div class="pinyin" style="margin-top: 5px; color: #2B6CB0;">★ Shuōhuàrén xǐhuan shénme?</div>
-            <div style="font-weight: bold;">★ 说话人喜欢什么？</div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q19" value="A"> A 新电脑 (xīn diànnǎo)</label>
-                <label class="option-label"><input type="radio" name="q19" value="B"> B 中国菜 (Zhōngguó cài)</label>
-                <label class="option-label"><input type="radio" name="q19" value="C"> C 中文名字 (Zhōngwén míngzi)</label>
-            </div>
-        </div>
-
-        <div class="question-card" id="card-q20">
-            <div class="pinyin">Jīntiān 8 hào, nǐ jǐ hào xiūxi?</div>
-            <div><span class="q-number">20.</span> 今天8号，你几号休息？</div>
-            <div class="pinyin" style="margin-top: 5px; color: #2B6CB0;">★ Shuōhuàrén xiǎng zhīdào shénme?</div>
-            <div style="font-weight: bold;">★ 说话人想知道什么？</div>
-            <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q20" value="A"> A 今天几号 (jīntiān jǐ hào)</label>
-                <label class="option-label"><input type="radio" name="q20" value="B"> B 哪天休息 (nǎ tiān xiūxi)</label>
-                <label class="option-label"><input type="radio" name="q20" value="C"> C 星期几上班 (xīngqījǐ shàngbān)</label>
-            </div>
+            <div><span class="q-number">13.</span> 我有一个儿子，他今年7岁。(Wǒ yǒu yí gè érzi, tā jīnnián 7 suì.)</div>
+            <div>Nhập hình tương ứng (A, B, C, D): <input type="text" class="fill-input" id="q13" maxlength="1"></div>
         </div>
 
         <div class="result-box" id="result-box"></div>
@@ -713,12 +355,9 @@
 <script>
 function checkAnswers() {
     const answers = {
-        q1: 'C', q2: 'A', q3: 'B', q4: 'A', q5: 'B',
-        q6: 'C', q7: 'B', q8: 'D', q9: 'B', q10: 'B',
-        q11: 'D', q12: 'C', q13: 'B',
-        q14: 'C', q15: 'B', q16: 'D',
-        q17: 'A', q18: 'B',
-        q19: 'C', q20: 'B'
+        q1: 'C', q2: 'A', q3: 'B',
+        q6: 'C', q7: 'B', q8: 'D',
+        q11: 'D', q12: 'C', q13: 'B'
     };
 
     let score = 0;
