@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bài tập HSK1 (Bài 5) - Chuẩn Sách Bài Tập</title>
+    <title>bài tập HSK1 (Bài 5) - Tiếng Trung Meow Meow</title>
     <style>
         :root {
             --primary-color: #4A90E2;
@@ -112,6 +112,30 @@
             font-weight: bold;
             color: var(--primary-color);
             margin-right: 8px;
+        }
+
+        .img-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .img-card {
+            text-align: center;
+            background: #FAFAFA;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1;
+            min-width: 130px;
+        }
+
+        .img-card svg {
+            width: 100px;
+            height: 100px;
         }
 
         .options-grid {
@@ -246,7 +270,7 @@
         <div class="section-title">一、听力 Phần nghe 🔊 5-3</div>
 
         <div class="audio-player-box">
-            <strong>🎧 File nghe âm thanh (5-3.mp3):</strong>
+            <strong>🎧 File nghe âm thanh:</strong>
             <audio controls>
                 <source src="5-3.mp3" type="audio/mpeg">
             </audio>
@@ -264,8 +288,23 @@
             <div class="vi-text">ba quả táo ( C √ )</div>
         </div>
 
+        <!-- Câu 1 -->
         <div class="question-card" id="card-q1">
-            <div><span class="q-number">1.</span> Chọn đáp án đúng:</div>
+            <div><span class="q-number">1.</span></div>
+            <div class="img-grid">
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="15" fill="#4A90E2"/><path d="M 30 80 Q 50 50 70 80" stroke="#4A90E2" stroke-width="8" fill="none"/></svg>
+                    <div><strong>A</strong> (chạy bộ)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="25" y="40" width="50" height="40" rx="5" fill="#E2E8F0" stroke="#3182CE" stroke-width="3"/><path d="M 40 20 L 40 40 M 60 20 L 60 40" stroke="#E53E3E" stroke-width="4"/></svg>
+                    <div><strong>B</strong> (nấu ăn)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><ellipse cx="50" cy="60" rx="35" ry="15" fill="#DD6B20"/><path d="M 20 60 Q 50 10 80 60" fill="#F6AD55"/></svg>
+                    <div><strong>C</strong> (xào nấu)</div>
+                </div>
+            </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q1" value="A"> A</label>
                 <label class="option-label"><input type="radio" name="q1" value="B"> B</label>
@@ -273,8 +312,23 @@
             </div>
         </div>
 
+        <!-- Câu 2 -->
         <div class="question-card" id="card-q2">
-            <div><span class="q-number">2.</span> Chọn đáp án đúng:</div>
+            <div><span class="q-number">2.</span></div>
+            <div class="img-grid">
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="35" y="20" width="30" height="60" fill="#319795"/><path d="M 50 35 L 50 65 M 35 50 L 65 50" stroke="#FFF" stroke-width="6"/></svg>
+                    <div><strong>A</strong> (y tế)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><circle cx="35" cy="40" r="12" fill="#D69E2E"/><circle cx="65" cy="40" r="12" fill="#3182CE"/><path d="M 20 80 Q 50 50 80 80" stroke="#4A5568" stroke-width="4" fill="none"/></svg>
+                    <div><strong>B</strong> (học nhóm)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" fill="#805AD5"/><circle cx="50" cy="50" r="10" fill="#FFF"/></svg>
+                    <div><strong>C</strong> (họp hành)</div>
+                </div>
+            </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q2" value="A"> A</label>
                 <label class="option-label"><input type="radio" name="q2" value="B"> B</label>
@@ -282,8 +336,23 @@
             </div>
         </div>
 
+        <!-- Câu 3 -->
         <div class="question-card" id="card-q3">
-            <div><span class="q-number">3.</span> Chọn đáp án đúng:</div>
+            <div><span class="q-number">3.</span></div>
+            <div class="img-grid">
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="30" text-anchor="middle" fill="#3182CE" font-weight="bold">3号</text></svg>
+                    <div><strong>A</strong> (ngày 3)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="26" text-anchor="middle" fill="#3182CE" font-weight="bold">12号</text></svg>
+                    <div><strong>B</strong> (ngày 12)</div>
+                </div>
+                <div class="img-card">
+                    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="5" fill="#FFF" stroke="#3182CE" stroke-width="4"/><text x="50" y="60" font-size="26" text-anchor="middle" fill="#3182CE" font-weight="bold">21号</text></svg>
+                    <div><strong>C</strong> (ngày 21)</div>
+                </div>
+            </div>
             <div class="options-grid">
                 <label class="option-label"><input type="radio" name="q3" value="A"> A</label>
                 <label class="option-label"><input type="radio" name="q3" value="B"> B</label>
@@ -331,8 +400,27 @@
         <p><strong>第6—8题：听对话，选择最匹配的图片。每题听两次。</strong><br>
         <span class="vi-text">Câu 6–8: Nghe và chọn hình ảnh phù hợp nhất với hội thoại nghe được. Mỗi câu nghe hai lần.</span></p>
 
+        <div class="img-grid">
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><circle cx="35" cy="40" r="10" fill="#3182CE"/><circle cx="65" cy="40" r="10" fill="#E53E3E"/><path d="M 35 60 L 65 60" stroke="#3182CE" stroke-width="4"/></svg>
+                <div><strong>A</strong> (bắt tay)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><rect x="25" y="20" width="50" height="60" fill="#FAF5FF" stroke="#9F7AEA" stroke-width="3"/><text x="50" y="55" font-size="16" text-anchor="middle" fill="#6B46C1">CALENDAR</text></svg>
+                <div><strong>B</strong> (xem lịch)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#FEFCBF" stroke="#D69E2E" stroke-width="3"/><path d="M 35 50 Q 50 30 65 50" stroke="#D69E2E" stroke-width="4" fill="none"/></svg>
+                <div><strong>C</strong> (món ăn)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" rx="3" fill="#E2E8F0" stroke="#4A5568" stroke-width="3"/><path d="M 15 70 L 85 70" stroke="#4A5568" stroke-width="4"/></svg>
+                <div><strong>D</strong> (máy tính)</div>
+            </div>
+        </div>
+
         <div class="question-card" id="card-q6">
-            <div><span class="q-number">6.</span> Chọn chữ cái hình tương ứng: 
+            <div><span class="q-number">6.</span> Chọn hình tương ứng: 
                 <select class="fill-select" id="q6">
                     <option value="">-- Chọn --</option>
                     <option value="A">A</option>
@@ -344,7 +432,7 @@
         </div>
 
         <div class="question-card" id="card-q7">
-            <div><span class="q-number">7.</span> Chọn chữ cái hình tương ứng: 
+            <div><span class="q-number">7.</span> Chọn hình tương ứng: 
                 <select class="fill-select" id="q7">
                     <option value="">-- Chọn --</option>
                     <option value="A">A</option>
@@ -356,7 +444,7 @@
         </div>
 
         <div class="question-card" id="card-q8">
-            <div><span class="q-number">8.</span> Chọn chữ cái hình tương ứng: 
+            <div><span class="q-number">8.</span> Chọn hình tương ứng: 
                 <select class="fill-select" id="q8">
                     <option value="">-- Chọn --</option>
                     <option value="A">A</option>
@@ -397,6 +485,25 @@
         <div class="part-title">第一部分 Phần 1</div>
         <p><strong>第11—13题：选择与句子最匹配的图片。</strong><br>
         <span class="vi-text">Câu 11–13: Chọn hình ảnh phù hợp nhất với câu.</span></p>
+
+        <div class="img-grid">
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" fill="#EBF8FF" stroke="#3182CE" stroke-width="3"/><path d="M 35 35 L 65 35 M 35 50 L 65 50 M 35 65 L 55 65" stroke="#3182CE" stroke-width="2"/></svg>
+                <div><strong>A</strong> (sách)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><path d="M 20 80 L 80 80 M 30 75 L 70 30" stroke="#2D3748" stroke-width="4"/></svg>
+                <div><strong>B</strong> (viết bài)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><rect x="20" y="50" width="60" height="25" fill="#CBD5E0"/><circle cx="35" cy="40" r="10" fill="#4A5568"/></svg>
+                <div><strong>C</strong> (nằm nghỉ)</div>
+            </div>
+            <div class="img-card">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="15" fill="#ED8936"/><path d="M 50 50 L 70 30 M 50 50 L 30 70" stroke="#ED8936" stroke-width="5"/></svg>
+                <div><strong>D</strong> (vẫy tay chào)</div>
+            </div>
+        </div>
 
         <div class="question-card" id="card-q11">
             <div class="pinyin">Wáng lǎoshī, zàijiàn.</div>
@@ -445,7 +552,6 @@
         <p><strong>第14—16题：匹配句子。</strong><br>
         <span class="vi-text">Câu 14–16: Nối câu (Chọn vế trả lời A, B, C, D phù hợp với câu hỏi).</span></p>
 
-        <!-- Danh sách vế trả lời cho trước -->
         <div class="match-box">
             <div class="match-item">
                 <div class="pinyin">Hǎo de, xièxie!</div>
@@ -519,7 +625,6 @@
         <p><strong>第17—18题：选词填空。</strong><br>
         <span class="vi-text">Câu 17–18: Chọn từ thích hợp điền vào chỗ trống.</span></p>
 
-        <!-- Ngân hàng từ cho trước -->
         <div class="word-bank-box">
             <div class="word-bank-item">
                 <div class="pinyin">jǐ</div>
