@@ -298,21 +298,34 @@
 
         <!-- 第二部分 -->
         <div class="part-title">第二部分</div>
-        <p><strong>第4—5题：听句子，判断对错。每题听两次。</strong></p>
+        <p><strong>第4—5题：听问题，选择正确回答。每题听两次。</strong></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div class="pinyin">Jīntiān tiānqì zěnmeyàng?</div>
+            <div>今天天气怎么样？</div>
+            <div class="options-grid" style="margin-top: 8px;">
+                <div>A. <span class="pinyin">fēicháng rè</span> 非常热 √</div>
+                <div>B. <span class="pinyin">hěn hǎotīng</span> 很好听</div>
+                <div>C. <span class="pinyin">zài hē shuǐ</span> 在喝水</div>
+            </div>
+        </div>
 
         <div class="question-card" id="card-q4">
             <div><span class="q-number">4.</span></div>
             <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q4" value="V"> √</label>
-                <label class="option-label"><input type="radio" name="q4" value="X"> ×</label>
+                <label class="option-label"><input type="radio" name="q4" value="A"> A. <span class="pinyin">wǒ bú huì</span> 我不会</label>
+                <label class="option-label"><input type="radio" name="q4" value="B"> B. <span class="pinyin">wǒ chī jiǎozi</span> 我吃饺子</label>
+                <label class="option-label"><input type="radio" name="q4" value="C"> C. <span class="pinyin">zuò miàntiáor</span> 做面条儿</label>
             </div>
         </div>
 
         <div class="question-card" id="card-q5">
             <div><span class="q-number">5.</span></div>
             <div class="options-grid">
-                <label class="option-label"><input type="radio" name="q5" value="V"> √</label>
-                <label class="option-label"><input type="radio" name="q5" value="X"> ×</label>
+                <label class="option-label"><input type="radio" name="q5" value="A"> A. <span class="pinyin">xiūxi</span> 休息</label>
+                <label class="option-label"><input type="radio" name="q5" value="B"> B. <span class="pinyin">Xīngqīsì</span> 星期四</label>
+                <label class="option-label"><input type="radio" name="q5" value="C"> C. <span class="pinyin">wǔ kǒu rén</span> 五口人</label>
             </div>
         </div>
 
@@ -503,9 +516,10 @@
 
 <script>
 function checkAnswers() {
+    // Lưu ý: Cập nhật đáp án chuẩn câu 4, 5 theo file nghe của bạn (ví dụ bên dưới đặt mặc định 4: B, 5: A)
     const answers = {
         q1: 'C', q2: 'A', q3: 'B',
-        q4: 'V', q5: 'X',
+        q4: 'B', q5: 'A',
         q6: 'C', q7: 'B', q8: 'D',
         q9: 'B', q10: 'A',
         q11: 'D', q12: 'C', q13: 'B',
