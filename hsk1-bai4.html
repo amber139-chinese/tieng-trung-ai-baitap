@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 练习 - 第4课</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #357ABD;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-color: #333333;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 26px;
+        }
+
+        .section-title {
+            background: #EBF3FA;
+            color: var(--secondary-color);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .part-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #444;
+        }
+
+        .audio-player-box {
+            background: #F0F7FF;
+            border: 1px solid #BEE3F8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            margin-top: 8px;
+        }
+
+        .example-box {
+            background: #FAF5FF;
+            border-left: 4px solid #9F7AEA;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #6B46C1;
+            margin-bottom: 5px;
+        }
+
+        .question-card {
+            background: #FFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .q-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .image-group {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .img-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .img-item img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .option-label input {
+            margin-right: 8px;
+        }
+
+        .fill-input {
+            width: 60px;
+            padding: 6px;
+            border: 1px solid #CBD5E0;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 15px;
+            margin-left: 10px;
+        }
+
+        .match-box {
+            background: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .match-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .result-box {
+            display: none;
+            background: #EBF8FF;
+            border: 2px solid #3182CE;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2B6CB0;
+            margin-top: 25px;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--border-color);
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>HSK1 练习 - 第4课 (我有两个孩子)</h1>
+    </header>
+
+    <form id="hsk-form">
+        <!-- ==================== 一、听力 ==================== -->
+        <div class="section-title">一、听力 🔊 4-3</div>
+
+        <div class="audio-player-box">
+            <strong>🎧 听力音频:</strong>
+            <audio controls>
+                <source src="4-3.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分</div>
+        <p><strong>第1—3题：听短语，选择正确图片。每题听两次。</strong></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>三个苹果 ( C √ )</div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=300" alt="书"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" alt="电脑"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300" alt="苹果"><br>C √</div>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q1">
+            <div><span class="q-number">1.</span></div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300" alt="2 công nhân/tài xế"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300" alt="Người phụ nữ đứng"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=300" alt="Em bé ngồi"><br>C</div>
+            </div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q1" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q1" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q1" value="C"> C</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q2">
+            <div><span class="q-number">2.</span></div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Cô gái trẻ"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300" alt="Cậu bé nam"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300" alt="Hai người bạn ôm nhau"><br>C</div>
+            </div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q2" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q2" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q2" value="C"> C</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q3">
+            <div><span class="q-number">3.</span></div>
+            <div class="image-group">
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?w=300" alt="3 trẻ em ngồi chơi"><br>A</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=300" alt="2 em bé sơ sinh"><br>B</div>
+                <div class="img-item"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=300" alt="2 cái cốc"><br>C</div>
+            </div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q3" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q3" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q3" value="C"> C</label>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分</div>
+        <p><strong>第4—5题：听问题，选择正确回答。每题听两次。</strong></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>今天天气怎么样？</div>
+            <div class="options-grid" style="margin-top: 8px;">
+                <div>A. 非常热 √</div>
+                <div>B. 很好听</div>
+                <div>C. 在喝水</div>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q4">
+            <div><span class="q-number">4.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q4" value="A"> A. 十人</label>
+                <label class="option-label"><input type="radio" name="q4" value="B"> B. 20个</label>
+                <label class="option-label"><input type="radio" name="q4" value="C"> C. 三口人</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q5">
+            <div><span class="q-number">5.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q5" value="A"> A. 大</label>
+                <label class="option-label"><input type="radio" name="q5" value="B"> B. 12岁</label>
+                <label class="option-label"><input type="radio" name="q5" value="C"> C. 两千</label>
+            </div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分</div>
+        <p><strong>第6—8题：听对话，选择最匹配的图片。每题听两次。</strong></p>
+
+        <div class="image-group">
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300" alt="Bắt tay"><br>A</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=300" alt="Em bé cằm trên bàn"><br>B</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300" alt="3 người bạn ngồi cùng"><br>C</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300" alt="Thầy giáo cạnh bảng"><br>D</div>
+        </div>
+
+        <div class="question-card" id="card-q6">
+            <div><span class="q-number">6.</span> <input type="text" class="fill-input" id="q6" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q7">
+            <div><span class="q-number">7.</span> <input type="text" class="fill-input" id="q7" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q8">
+            <div><span class="q-number">8.</span> <input type="text" class="fill-input" id="q8" maxlength="1"></div>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="part-title">第四部分</div>
+        <p><strong>第9—10题：听句子和问题，选择正确答案。每题听两次。</strong></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>下午我去超市，我想买一些水果。</div>
+            <div>问：说话人下午去哪里？</div>
+            <div class="options-grid" style="margin-top: 8px;">
+                <div>A. 超市 √</div>
+                <div>B. 医院</div>
+                <div>C. 学校</div>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q9">
+            <div><span class="q-number">9.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q9" value="A"> A. 中国人</label>
+                <label class="option-label"><input type="radio" name="q9" value="B"> B. 泰国人</label>
+                <label class="option-label"><input type="radio" name="q9" value="C"> C. 法国人</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q10">
+            <div><span class="q-number">10.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q10" value="A"> A. 安妮</label>
+                <label class="option-label"><input type="radio" name="q10" value="B"> B. 王一飞</label>
+                <label class="option-label"><input type="radio" name="q10" value="C"> C. 白家月</label>
+            </div>
+        </div>
+
+        <!-- ==================== 二、阅读 ==================== -->
+        <div class="section-title">二、阅读</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分</div>
+        <p><strong>第11—13题：选择与句子最匹配的图片。</strong></p>
+
+        <div class="image-group">
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=300" alt="Cô gái đọc sách"><br>A</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300" alt="Nam sinh ôm sách"><br>B</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=300" alt="Chào thầy giáo"><br>C</div>
+            <div class="img-item"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300" alt="Gia đình 4 người ngoài trời"><br>D</div>
+        </div>
+
+        <div class="question-card" id="card-q11">
+            <div><span class="q-number">11.</span> 老师，您好！</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q11" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q12">
+            <div><span class="q-number">12.</span> 我家有四口人。</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q12" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q13">
+            <div><span class="q-number">13.</span> 我哥哥今年20岁。</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q13" maxlength="1"></div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分</div>
+        <p><strong>第14—16题：匹配句子。</strong></p>
+
+        <div class="match-box">
+            <div class="match-options">
+                <div><strong>A.</strong> 好的，谢谢！</div>
+                <div><strong>B.</strong> 他今年5岁。</div>
+                <div><strong>C.</strong> 我女朋友。</div>
+                <div><strong>D.</strong> 是的。</div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>你喝水吗？</div>
+            <div>A</div>
+        </div>
+
+        <div class="question-card" id="card-q14">
+            <div><span class="q-number">14.</span> 她是谁？</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q14" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q15">
+            <div><span class="q-number">15.</span> 你是法国人吗？</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q15" maxlength="1"></div>
+        </div>
+
+        <div class="question-card" id="card-q16">
+            <div><span class="q-number">16.</span> 您儿子多大？</div>
+            <div style="margin-top:8px;"><input type="text" class="fill-input" id="q16" maxlength="1"></div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分</div>
+        <p><strong>第17—18题：选词填空。</strong></p>
+
+        <div class="match-box">
+            <div class="match-options">
+                <div><strong>A.</strong> 想</div>
+                <div><strong>B.</strong> 忙</div>
+                <div><strong>C.</strong> 名字</div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>你叫什么（ C ）？</div>
+        </div>
+
+        <div class="question-card" id="card-q17">
+            <div><span class="q-number">17.</span> 她工作很（ <input type="text" class="fill-input" id="q17" maxlength="1"> ）。</div>
+        </div>
+
+        <div class="question-card" id="card-q18">
+            <div><span class="q-number">18.</span></div>
+            <div>男：你们好吗？</div>
+            <div style="margin-top: 5px;">女：很好，我们很（ <input type="text" class="fill-input" id="q18" maxlength="1"> ）你。</div>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="part-title">第四部分</div>
+        <p><strong>第19—20题：选择正确答案。</strong></p>
+
+        <div class="example-box">
+            <div class="example-title">例如：</div>
+            <div>请问现在几点了？</div>
+            <div>★ 说话人想知道什么？</div>
+            <div>A. 时间 √ &nbsp;&nbsp;&nbsp;&nbsp; B. 名字 &nbsp;&nbsp;&nbsp;&nbsp; C. 房间号</div>
+        </div>
+
+        <div class="question-card" id="card-q19">
+            <div><span class="q-number">19.</span> 我家有三口人，爸爸、妈妈和我。</div>
+            <div style="margin-top: 6px; font-weight: bold;">★ 说话人家里有：</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q19" value="A"> A. 姐姐</label>
+                <label class="option-label"><input type="radio" name="q19" value="B"> B. 三口人</label>
+                <label class="option-label"><input type="radio" name="q19" value="C"> C. 四口人</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q20">
+            <div><span class="q-number">20.</span> 它是法国人，我不是。</div>
+            <div style="margin-top: 6px; font-weight: bold;">★ “她”是：</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q20" value="A"> A. 法国人</label>
+                <label class="option-label"><input type="radio" name="q20" value="B"> B. 中国人</label>
+                <label class="option-label"><input type="radio" name="q20" value="C"> C. 泰国人</label>
+            </div>
+        </div>
+
+        <div class="result-box" id="result-box"></div>
+
+        <div class="submit-container">
+            <button type="button" class="btn-submit" onclick="checkAnswers()">提交</button>
+        </div>
+    </form>
+</div>
+
+<script>
+function checkAnswers() {
+    // Key đáp án chính xác theo sách HSK 1 Bài 4
+    const answers = {
+        q1: 'C', q2: 'A', q3: 'A',
+        q4: 'C', q5: 'B',
+        q6: 'C', q7: 'B', q8: 'D',
+        q9: 'C', q10: 'A',
+        q11: 'C', q12: 'D', q13: 'B',
+        q14: 'C', q15: 'D', q16: 'B',
+        q17: 'B', q18: 'A',
+        q19: 'B', q20: 'A'
+    };
+
+    let score = 0;
+    let total = Object.keys(answers).length;
+
+    for (let key in answers) {
+        let card = document.getElementById('card-' + key);
+        let userVal = '';
+
+        let radioChecked = document.querySelector(`input[name="${key}"]:checked`);
+        if (radioChecked) {
+            userVal = radioChecked.value;
+        } else {
+            let inputElem = document.getElementById(key);
+            if (inputElem) {
+                userVal = inputElem.value.trim().toUpperCase();
+            }
+        }
+
+        if (userVal === answers[key]) {
+            score++;
+            if (card) {
+                card.style.border = '2px solid #48BB78';
+                card.style.backgroundColor = '#F0FFF4';
+            }
+        } else {
+            if (card) {
+                card.style.border = '2px solid #F56565';
+                card.style.backgroundColor = '#FFF5F5';
+            }
+        }
+    }
+
+    let resultBox = document.getElementById('result-box');
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `🎉 完成！<br>📊 成绩：<strong>${score} / ${total}</strong> 正确。`;
+    resultBox.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
