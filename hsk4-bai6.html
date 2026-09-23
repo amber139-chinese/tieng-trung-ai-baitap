@@ -1,1 +1,752 @@
 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK 4 练习 - Lớp Tiếng Trung Meow Meow</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #357ABD;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-color: #333333;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            background: #EBF3FA;
+            color: var(--secondary-color);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .part-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #444;
+        }
+
+        .audio-player-box {
+            background: #F0F7FF;
+            border: 1px solid #BEE3F8;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            margin-top: 8px;
+        }
+
+        .question-card {
+            background: #FFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .q-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .q-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .option-label input {
+            margin-right: 8px;
+        }
+
+        .fill-input {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #CBD5E0;
+            border-radius: 4px;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+        .word-bank {
+            background: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result-box {
+            display: none;
+            background: #EBF8FF;
+            border: 2px solid #3182CE;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2B6CB0;
+            margin-top: 25px;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--border-color);
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>HSK 4 练习</h1>
+        <div class="subtitle">🐱 Lớp Tiếng Trung Meow Meow</div>
+    </header>
+
+    <form id="hsk-form">
+        <!-- ==================== 一、听力 ==================== -->
+        <div class="section-title">一、听力</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分 (第1-5题：判断对错)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 06-1:</strong>
+            <audio controls>
+                <source src="06-1.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q1">
+            <div class="q-text"><span class="q-number">1.</span> ★ 他想买面包。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q1" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q1" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q2">
+            <div class="q-text"><span class="q-number">2.</span> ★ 她想买些西红柿。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q2" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q2" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q3">
+            <div class="q-text"><span class="q-number">3.</span> ★ 他们在参加招聘会。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q3" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q3" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q4">
+            <div class="q-text"><span class="q-number">4.</span> ★ 现在的房子很贵。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q4" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q4" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q5">
+            <div class="q-text"><span class="q-number">5.</span> ★ 他想周日去看电脑。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q5" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q5" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 (第6-12题：请选出正确答案)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 06-2:</strong>
+            <audio controls>
+                <source src="06-2.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q6">
+            <div class="q-text"><span class="q-number">6.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q6" value="A"> A. 请假</label>
+                <label class="option-label"><input type="radio" name="q6" value="B"> B. 唱歌</label>
+                <label class="option-label"><input type="radio" name="q6" value="C"> C. 散步</label>
+                <label class="option-label"><input type="radio" name="q6" value="D"> D. 买东西</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q7">
+            <div class="q-text"><span class="q-number">7.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q7" value="A"> A. 老师</label>
+                <label class="option-label"><input type="radio" name="q7" value="B"> B. 售货员</label>
+                <label class="option-label"><input type="radio" name="q7" value="C"> C. 律师</label>
+                <label class="option-label"><input type="radio" name="q7" value="D"> D. 出租车司机</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q8">
+            <div class="q-text"><span class="q-number">8.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q8" value="A"> A. 家具店</label>
+                <label class="option-label"><input type="radio" name="q8" value="B"> B. 体育馆</label>
+                <label class="option-label"><input type="radio" name="q8" value="C"> C. 图书馆</label>
+                <label class="option-label"><input type="radio" name="q8" value="D"> D. 洗手间</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q9">
+            <div class="q-text"><span class="q-number">9.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q9" value="A"> A. 西红柿和香蕉</label>
+                <label class="option-label"><input type="radio" name="q9" value="B"> B. 香蕉和葡萄</label>
+                <label class="option-label"><input type="radio" name="q9" value="C"> C. 西红柿和葡萄</label>
+                <label class="option-label"><input type="radio" name="q9" value="D"> D. 西红柿和苹果</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q10">
+            <div class="q-text"><span class="q-number">10.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q10" value="A"> A. 300 元</label>
+                <label class="option-label"><input type="radio" name="q10" value="B"> B. 500 元</label>
+                <label class="option-label"><input type="radio" name="q10" value="C"> C. 700 元</label>
+                <label class="option-label"><input type="radio" name="q10" value="D"> D. 1000 元</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q11">
+            <div class="q-text"><span class="q-number">11.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q11" value="A"> A. 逛街</label>
+                <label class="option-label"><input type="radio" name="q11" value="B"> B. 加班</label>
+                <label class="option-label"><input type="radio" name="q11" value="C"> C. 打球</label>
+                <label class="option-label"><input type="radio" name="q11" value="D"> D. 买礼物</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q12">
+            <div class="q-text"><span class="q-number">12.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q12" value="A"> A. 在做生意</label>
+                <label class="option-label"><input type="radio" name="q12" value="B"> B. 去旅游了</label>
+                <label class="option-label"><input type="radio" name="q12" value="C"> C. 去逛街了</label>
+                <label class="option-label"><input type="radio" name="q12" value="D"> D. 衣服旧了</label>
+            </div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分 (第13-22题：请选出正确答案)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 06-3:</strong>
+            <audio controls>
+                <source src="06-3.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q13">
+            <div class="q-text"><span class="q-number">13.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q13" value="A"> A. 她变胖了</label>
+                <label class="option-label"><input type="radio" name="q13" value="B"> B. 衣服太贵</label>
+                <label class="option-label"><input type="radio" name="q13" value="C"> C. 想买黄的</label>
+                <label class="option-label"><input type="radio" name="q13" value="D"> D. 再试试白的</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q14">
+            <div class="q-text"><span class="q-number">14.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q14" value="A"> A. 医生</label>
+                <label class="option-label"><input type="radio" name="q14" value="B"> B. 老师</label>
+                <label class="option-label"><input type="radio" name="q14" value="C"> C. 售货员</label>
+                <label class="option-label"><input type="radio" name="q14" value="D"> D. 运动员</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q15">
+            <div class="q-text"><span class="q-number">15.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q15" value="A"> A. 天气很冷</label>
+                <label class="option-label"><input type="radio" name="q15" value="B"> B. 电梯坏了</label>
+                <label class="option-label"><input type="radio" name="q15" value="C"> C. 女的去买东西</label>
+                <label class="option-label"><input type="radio" name="q15" value="D"> D. 他们在逛街</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q16">
+            <div class="q-text"><span class="q-number">16.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q16" value="A"> A. 不好看</label>
+                <label class="option-label"><input type="radio" name="q16" value="B"> B. 不好用</label>
+                <label class="option-label"><input type="radio" name="q16" value="C"> C. 很便宜</label>
+                <label class="option-label"><input type="radio" name="q16" value="D"> D. 很好用</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q17">
+            <div class="q-text"><span class="q-number">17.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q17" value="A"> A. 西红柿</label>
+                <label class="option-label"><input type="radio" name="q17" value="B"> B. 蛋糕</label>
+                <label class="option-label"><input type="radio" name="q17" value="C"> C. 鸡蛋</label>
+                <label class="option-label"><input type="radio" name="q17" value="D"> D. 面条</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q18">
+            <div class="q-text"><span class="q-number">18.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q18" value="A"> A. 衣服在打折</label>
+                <label class="option-label"><input type="radio" name="q18" value="B"> B. 男的是律师</label>
+                <label class="option-label"><input type="radio" name="q18" value="C"> C. 顾客不满意</label>
+                <label class="option-label"><input type="radio" name="q18" value="D"> D. 裙子卖完了</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q19">
+            <div class="q-text"><span class="q-number">19.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q19" value="A"> A. 冰箱</label>
+                <label class="option-label"><input type="radio" name="q19" value="B"> B. 电视</label>
+                <label class="option-label"><input type="radio" name="q19" value="C"> C. 空调</label>
+                <label class="option-label"><input type="radio" name="q19" value="D"> D. 洗衣机</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q20">
+            <div class="q-text"><span class="q-number">20.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q20" value="A"> A. 一个月</label>
+                <label class="option-label"><input type="radio" name="q20" value="B"> B. 半年</label>
+                <label class="option-label"><input type="radio" name="q20" value="C"> C. 一年</label>
+                <label class="option-label"><input type="radio" name="q20" value="D"> D. 两年</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q21">
+            <div class="q-text"><span class="q-number">21.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q21" value="A"> A. 很高兴</label>
+                <label class="option-label"><input type="radio" name="q21" value="B"> B. 很难过</label>
+                <label class="option-label"><input type="radio" name="q21" value="C"> C. 不感兴趣</label>
+                <label class="option-label"><input type="radio" name="q21" value="D"> D. 很有礼貌</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q22">
+            <div class="q-text"><span class="q-number">22.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q22" value="A"> A. 商店的</label>
+                <label class="option-label"><input type="radio" name="q22" value="B"> B. 同事的</label>
+                <label class="option-label"><input type="radio" name="q22" value="C"> C. 售货员的</label>
+                <label class="option-label"><input type="radio" name="q22" value="D"> D. 一位顾客的</label>
+            </div>
+        </div>
+
+        <!-- ==================== 二、阅读 ==================== -->
+        <div class="section-title">二、阅读</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分 (第23-30题：选词填空)</div>
+
+        <div class="word-bank">A 情况 &nbsp;&nbsp;&nbsp; B 获得 &nbsp;&nbsp;&nbsp; C 举办 &nbsp;&nbsp;&nbsp; D 坚持 &nbsp;&nbsp;&nbsp; E 所有</div>
+
+        <div class="question-card" id="card-q23">
+            <div class="q-text"><span class="q-number">23.</span> 你应该学会说“不”，而不是（ &nbsp;&nbsp; ）的要求都接受。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q23" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q23" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q23" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q23" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q23" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q24">
+            <div class="q-text"><span class="q-number">24.</span> 没想到她第一次参加比赛就（ &nbsp;&nbsp; ）了这么大的成功。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q24" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q24" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q24" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q24" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q24" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q25">
+            <div class="q-text"><span class="q-number">25.</span> 您说的这个（ &nbsp;&nbsp; ）很重要，我们今天就安排人去调查。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q25" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q25" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q25" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q25" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q25" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q26">
+            <div class="q-text"><span class="q-number">26.</span> 我们学校经常会（ &nbsp;&nbsp; ）一些活动来丰富学生们的生活。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q26" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q26" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q26" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q26" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q26" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="word-bank" style="margin-top: 20px;">A 支持 &nbsp;&nbsp;&nbsp; B 方面 &nbsp;&nbsp;&nbsp; C 温度 &nbsp;&nbsp;&nbsp; D 竟然 &nbsp;&nbsp;&nbsp; E 小说</div>
+
+        <div class="question-card" id="card-q27">
+            <div class="q-text"><span class="q-number">27.</span> A: 呀，你的这个行李箱（ &nbsp;&nbsp; ）跟我的完全一样。<br>B: 那是我去年夏天买的，你是什么时候买的？</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q27" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q27" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q27" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q27" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q27" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q28">
+            <div class="q-text"><span class="q-number">28.</span> A: 这本（ &nbsp;&nbsp; ）很有意思，我差不多明天就能看完，后天见面时就可以还你。<br>B: 不着急，你慢慢看，周末给我吧。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q28" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q28" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q28" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q28" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q28" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q29">
+            <div class="q-text"><span class="q-number">29.</span> A: 王教授，感谢您对我们工作的（ &nbsp;&nbsp; ）。<br>B: 别客气，这是我应该做的。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q29" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q29" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q29" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q29" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q29" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q30">
+            <div class="q-text"><span class="q-number">30.</span> A: 你有没有李律师的电话？我想问他几个法律（ &nbsp;&nbsp; ）的问题。<br>B: 有，我发到你手机上，你直接跟联系就可以。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q30" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q30" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q30" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q30" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q30" value="E"> E</label>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 (第31-34题：排列顺序)</div>
+
+        <div class="question-card" id="card-q31">
+            <div class="q-text"><span class="q-number">31.</span><br>A 现在只卖300块<br>B 原价是现在的两倍多呢，找一件您试试吧<br>C 这种裙子今年非常流行，质量很好</div>
+            <input type="text" class="fill-input" id="q31" placeholder="请填写顺序，如: CAB">
+        </div>
+
+        <div class="question-card" id="card-q32">
+            <div class="q-text"><span class="q-number">32.</span><br>A 他是我大学时的同学<br>B 毕业后我们就再也没联系过<br>C 没想到中午我去取护照时竟然遇到他了</div>
+            <input type="text" class="fill-input" id="q32" placeholder="请填写顺序，如: ABC">
+        </div>
+
+        <div class="question-card" id="card-q33">
+            <div class="q-text"><span class="q-number">33.</span><br>A 但是他很诚实<br>B 小关的脾气有时候是有种点儿差<br>C 是个值得相信的人</div>
+            <input type="text" class="fill-input" id="q33" placeholder="请填写顺序，如: BAC">
+        </div>
+
+        <div class="question-card" id="card-q34">
+            <div class="q-text"><span class="q-number">34.</span><br>A 这种情况下，就需要及时交流<br>B 两个人在一起，总会遇到问题<br>C 如果不这样做的话，关系就可能会越来越远</div>
+            <input type="text" class="fill-input" id="q34" placeholder="请填写顺序，如: BAC">
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分 (第35-43题：请选出正确答案)</div>
+
+        <div class="question-card" id="card-q35">
+            <div class="q-text"><span class="q-number">35.</span> 实际上，售货员太热情地为顾客介绍这、介绍那，会让我觉得极不舒服。许多人在逛商场时喜欢自己看、自己选，而不愿意总是被别人打扰。<br><strong>★ “我”在逛商场时：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q35" value="A"> A. 觉得无聊</label>
+                <label class="option-label"><input type="radio" name="q35" value="B"> B. 喜欢自己选</label>
+                <label class="option-label"><input type="radio" name="q35" value="C"> C. 很少考虑价格</label>
+                <label class="option-label"><input type="radio" name="q35" value="D"> D. 喜欢售货员介绍</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q36">
+            <div class="q-text"><span class="q-number">36.</span> 做生意讲的是“一分钱一分货”，意思是说货物的质量和价格有很大的关系，所以人们经常说“便宜没好货，好货不便宜”。<br><strong>★ 一般情况下，贵的东西：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q36" value="A"> A. 广告多</label>
+                <label class="option-label"><input type="radio" name="q36" value="B"> B. 赚得多</label>
+                <label class="option-label"><input type="radio" name="q36" value="C"> C. 不好卖</label>
+                <label class="option-label"><input type="radio" name="q36" value="D"> D. 质量好</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q37">
+            <div class="q-text"><span class="q-number">37.</span> 每到换季或者节假日的时候，各大商场都会举办一些打折活动来吸引顾客。这样人们就能花很少的钱买到质量不错的东西，有时一样的东西甚至能比平时少花一半的钱。<br><strong>★ 商场举办活动是为了：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q37" value="A"> A. 检查质量</label>
+                <label class="option-label"><input type="radio" name="q37" value="B"> B. 吸引顾客</label>
+                <label class="option-label"><input type="radio" name="q37" value="C"> C. 举行招聘会</label>
+                <label class="option-label"><input type="radio" name="q37" value="D"> D. 提高服务水平</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q38">
+            <div class="q-text"><span class="q-number">38.</span> 如果一个星期内发现有任何质量问题，我们都可以免费为您更换，但是购物小票一定要留好。如果没有购物小票，我们是没法给您更换的。<br><strong>★ 说话人提醒他：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q38" value="A"> A. 看购物小票</label>
+                <label class="option-label"><input type="radio" name="q38" value="B"> B. 留着购物小票</label>
+                <label class="option-label"><input type="radio" name="q38" value="C"> C. 一个月以内换</label>
+                <label class="option-label"><input type="radio" name="q38" value="D"> D. 东西不能换</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q39">
+            <div class="q-text"><span class="q-number">39.</span> 小姐，这些菜是绿色食品，不仅很好吃，而且对身体也很有好处，所以价格要比其他菜贵一些。<br><strong>★ 这些菜的特点是：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q39" value="A"> A. 干净</label>
+                <label class="option-label"><input type="radio" name="q39" value="B"> B. 便宜</label>
+                <label class="option-label"><input type="radio" name="q39" value="C"> C. 味道不太好</label>
+                <label class="option-label"><input type="radio" name="q39" value="D"> D. 对身体好</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q40">
+            <div class="q-text"><span class="q-number">40-41.</span> 顾客朋友们，本超市现举行“购物送好礼”活动，购物满100元即可获得可乐一瓶，满500元可获得葡萄酒一瓶。另外，还有水果打折活动，其中，苹果9折，葡萄8折，香蕉、西瓜6折。欢迎选购！祝您购物愉快！<br><br><strong>★ 购物满100元能获得什么礼物？</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q40" value="A"> A. 西红柿</label>
+                <label class="option-label"><input type="radio" name="q40" value="B"> B. 葡萄酒</label>
+                <label class="option-label"><input type="radio" name="q40" value="C"> C. 可乐</label>
+                <label class="option-label"><input type="radio" name="q40" value="D"> D. 西瓜</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q41">
+            <div class="q-text"><strong>★ 根据这段话，可以知道：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q41" value="A"> A. 超市生意很好</label>
+                <label class="option-label"><input type="radio" name="q41" value="B"> B. 葡萄酒半价</label>
+                <label class="option-label"><input type="radio" name="q41" value="C"> C. 有些水果打折</label>
+                <label class="option-label"><input type="radio" name="q41" value="D"> D. 饮料免费</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q42">
+            <div class="q-text"><span class="q-number">42-43.</span> 你卖的东西可不可以比别人卖的价格高？这主要要看东西的质量。如果质量比别人的好，那么价格比别人的贵一点儿也没关系。另外，环境和服务水平也很重要。质量完全一样的东西，但如果环境和服务更好，那么即使贵一点儿，大家也能接受。<br><br><strong>★ 这段话主要想说明，质量好的东西可以：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q42" value="A"> A. 卖得贵</label>
+                <label class="option-label"><input type="radio" name="q42" value="B"> B. 卖得快</label>
+                <label class="option-label"><input type="radio" name="q42" value="C"> C. 用得久</label>
+                <label class="option-label"><input type="radio" name="q42" value="D"> D. 很流行</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q43">
+            <div class="q-text"><strong>★ 质量相同的物品，怎样能卖更高的价格？</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q43" value="A"> A. 做广告</label>
+                <label class="option-label"><input type="radio" name="q43" value="B"> B. 送礼物</label>
+                <label class="option-label"><input type="radio" name="q43" value="C"> C. 免费试用</label>
+                <label class="option-label"><input type="radio" name="q43" value="D"> D. 提高服务水平</label>
+            </div>
+        </div>
+
+        <!-- ==================== 三、书写 ==================== -->
+        <div class="section-title">三、书写</div>
+        <div class="part-title">第一部分 (第44-48题：完成句子)</div>
+
+        <div class="question-card" id="card-q44">
+            <div class="q-text"><span class="q-number">44.</span> 这双袜子 / 给我的 / 是 / 弟弟</div>
+            <input type="text" class="fill-input" id="q44" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q45">
+            <div class="q-text"><span class="q-number">45.</span> 水 / 瓶子 / 的 / 满了 / 里</div>
+            <input type="text" class="fill-input" id="q45" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q46">
+            <div class="q-text"><span class="q-number">46.</span> 饮料 / 火车上 / 不提供 / 免费的</div>
+            <input type="text" class="fill-input" id="q46" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q47">
+            <div class="q-text"><span class="q-number">47.</span> 举行 / 这次电影艺术节 / 北京 / 会 / 在</div>
+            <input type="text" class="fill-input" id="q47" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q48">
+            <div class="q-text"><span class="q-number">48.</span> 对 / 非常感谢您 / 理解和支持 / 我们工作的</div>
+            <input type="text" class="fill-input" id="q48" placeholder="请写出完整句子">
+        </div>
+
+        <div class="result-box" id="result-box"></div>
+
+        <div class="submit-container">
+            <button type="button" class="btn-submit" onclick="checkAnswers()">提交 (Nộp bài)</button>
+        </div>
+    </form>
+</div>
+
+<script>
+function checkAnswers() {
+    // Key đáp án chuẩn xác cho bộ đề Audio 06
+    const answers = {
+        q1: '√', q2: '√', q3: '×', q4: '√', q5: '×',
+        q6: 'D', q7: 'B', q8: 'A', q9: 'C', q10: 'B', q11: 'A', q12: 'D',
+        q13: 'A', q14: 'C', q15: 'B', q16: 'D', q17: 'A', q18: 'A', q19: 'C', q20: 'C', q21: 'A', q22: 'D',
+        q23: 'E', q24: 'B', q25: 'A', q26: 'C',
+        q27: 'D', q28: 'E', q29: 'A', q30: 'B',
+        q31: 'CAB', q32: 'ABC', q33: 'BAC', q34: 'BAC',
+        q35: 'B', q36: 'D', q37: 'B', q38: 'B', q39: 'D', q40: 'C', q41: 'C', q42: 'A', q43: 'D',
+        q44: '这双袜子是弟弟给我的。',
+        q45: '瓶子里装满了水。',
+        q46: '火车上不提供免费的饮料。',
+        q47: '这次电影艺术节会在北京举行。',
+        q48: '非常感谢您对我们工作的理解和支持。'
+    };
+
+    let score = 0;
+    let total = Object.keys(answers).length;
+
+    for (let key in answers) {
+        let card = document.getElementById('card-' + key);
+        let isCorrect = false;
+
+        let radioChecked = document.querySelector(`input[name="${key}"]:checked`);
+        if (radioChecked) {
+            if (radioChecked.value === answers[key]) {
+                isCorrect = true;
+            }
+        } else {
+            let inputElem = document.getElementById(key);
+            if (inputElem) {
+                let userVal = inputElem.value.trim().replace(/\s+/g, '').replace(/[。,.!]/g, '');
+                let targetVal = answers[key].replace(/\s+/g, '').replace(/[。,.!]/g, '');
+                // Cho phép linh hoạt xếp từ ở câu 45 (瓶子里水满了 / 瓶子里的水满了)
+                if (key === 'q45' && (userVal === '瓶子里水满了' || userVal === '瓶子里的水满了')) {
+                    isCorrect = true;
+                } else if (userVal.toUpperCase() === targetVal.toUpperCase()) {
+                    isCorrect = true;
+                }
+            }
+        }
+
+        if (isCorrect) {
+            score++;
+            if (card) {
+                card.style.border = '2px solid #48BB78';
+                card.style.backgroundColor = '#F0FFF4';
+            }
+        } else {
+            if (card) {
+                card.style.border = '2px solid #F56565';
+                card.style.backgroundColor = '#FFF5F5';
+            }
+        }
+    }
+
+    let resultBox = document.getElementById('result-box');
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `🎉 答题完成！(Hoàn thành bài làm)<br>📊 成绩 (Điểm số): <strong>${score} / ${total}</strong> 正确 (Câu đúng).`;
+    resultBox.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
