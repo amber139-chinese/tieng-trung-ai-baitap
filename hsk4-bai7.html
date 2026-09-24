@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK 4 练习 - Lớp Tiếng Trung Meow Meow</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #357ABD;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-color: #333333;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            background: #EBF3FA;
+            color: var(--secondary-color);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .part-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #444;
+        }
+
+        .audio-player-box {
+            background: #F0F7FF;
+            border: 1px solid #BEE3F8;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            margin-top: 8px;
+        }
+
+        .question-card {
+            background: #FFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .q-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .q-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .option-label input {
+            margin-right: 8px;
+        }
+
+        .fill-input {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #CBD5E0;
+            border-radius: 4px;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+        .word-bank {
+            background: #F7FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result-box {
+            display: none;
+            background: #EBF8FF;
+            border: 2px solid #3182CE;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2B6CB0;
+            margin-top: 25px;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--border-color);
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>HSK 4 练习</h1>
+        <div class="subtitle">🐱 Lớp Tiếng Trung Meow Meow</div>
+    </header>
+
+    <form id="hsk-form">
+        <!-- ==================== 一、听力 ==================== -->
+        <div class="section-title">一、听力</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分 (第1-5题：判断对错)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 07-1:</strong>
+            <audio controls>
+                <source src="07-1.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q1">
+            <div class="q-text"><span class="q-number">1.</span> ★ 他最近又胖了。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q1" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q1" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q2">
+            <div class="q-text"><span class="q-number">2.</span> ★ 春天容易感冒。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q2" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q2" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q3">
+            <div class="q-text"><span class="q-number">3.</span> ★ 女人都想过减肥。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q3" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q3" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q4">
+            <div class="q-text"><span class="q-number">4.</span> ★ 自己要对健康负责。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q4" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q4" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q5">
+            <div class="q-text"><span class="q-number">5.</span> ★ 睡太久对身体不好。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q5" value="√"> √ 正确</label>
+                <label class="option-label"><input type="radio" name="q5" value="×"> × 错误</label>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 (第6-12题：请选出正确答案)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 07-2:</strong>
+            <audio controls>
+                <source src="07-2.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q6">
+            <div class="q-text"><span class="q-number">6.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q6" value="A"> A. 发烧了</label>
+                <label class="option-label"><input type="radio" name="q6" value="B"> B. 感冒了</label>
+                <label class="option-label"><input type="radio" name="q6" value="C"> C. 流鼻血了</label>
+                <label class="option-label"><input type="radio" name="q6" value="D"> D. 肚子疼</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q7">
+            <div class="q-text"><span class="q-number">7.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q7" value="A"> A. 饿了</label>
+                <label class="option-label"><input type="radio" name="q7" value="B"> B. 胖了</label>
+                <label class="option-label"><input type="radio" name="q7" value="C"> C. 茶喝多了</label>
+                <label class="option-label"><input type="radio" name="q7" value="D"> D. 肚子不舒服</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q8">
+            <div class="q-text"><span class="q-number">8.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q8" value="A"> A. 嘴</label>
+                <label class="option-label"><input type="radio" name="q8" value="B"> B. 牙</label>
+                <label class="option-label"><input type="radio" name="q8" value="C"> C. 头</label>
+                <label class="option-label"><input type="radio" name="q8" value="D"> D. 肚子</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q9">
+            <div class="q-text"><span class="q-number">9.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q9" value="A"> A. 腿流血了</label>
+                <label class="option-label"><input type="radio" name="q9" value="B"> B. 手流血了</label>
+                <label class="option-label"><input type="radio" name="q9" value="C"> C. 足球丢了</label>
+                <label class="option-label"><input type="radio" name="q9" value="D"> D. 去医院了</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q10">
+            <div class="q-text"><span class="q-number">10.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q10" value="A"> A. 图书馆</label>
+                <label class="option-label"><input type="radio" name="q10" value="B"> B. 体育馆</label>
+                <label class="option-label"><input type="radio" name="q10" value="C"> C. 医院</label>
+                <label class="option-label"><input type="radio" name="q10" value="D"> D. 电影院</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q11">
+            <div class="q-text"><span class="q-number">11.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q11" value="A"> A. 她不用减肥</label>
+                <label class="option-label"><input type="radio" name="q11" value="B"> B. 她太胖了</label>
+                <label class="option-label"><input type="radio" name="q11" value="C"> C. 她太瘦了</label>
+                <label class="option-label"><input type="radio" name="q11" value="D"> D. 她在开玩笑</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q12">
+            <div class="q-text"><span class="q-number">12.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q12" value="A"> A. 发烧了</label>
+                <label class="option-label"><input type="radio" name="q12" value="B"> B. 肚子疼</label>
+                <label class="option-label"><input type="radio" name="q12" value="C"> C. 一直咳嗽</label>
+                <label class="option-label"><input type="radio" name="q12" value="D"> D. 陪同事看病</label>
+            </div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分 (第13-22题：请选出正确答案)</div>
+        <div class="audio-player-box">
+            <strong>🎧 听力音频 07-3:</strong>
+            <audio controls>
+                <source src="07-3.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="question-card" id="card-q13">
+            <div class="q-text"><span class="q-number">13.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q13" value="A"> A. 病好了</label>
+                <label class="option-label"><input type="radio" name="q13" value="B"> B. 太忙了</label>
+                <label class="option-label"><input type="radio" name="q13" value="C"> C. 请不了假</label>
+                <label class="option-label"><input type="radio" name="q13" value="D"> D. 不愿意吃药</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q14">
+            <div class="q-text"><span class="q-number">14.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q14" value="A"> A. 少吃饭</label>
+                <label class="option-label"><input type="radio" name="q14" value="B"> B. 做运动</label>
+                <label class="option-label"><input type="radio" name="q14" value="C"> C. 多吃水果</label>
+                <label class="option-label"><input type="radio" name="q14" value="D"> D. 吃减肥药</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q15">
+            <div class="q-text"><span class="q-number">15.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q15" value="A"> A. 头疼</label>
+                <label class="option-label"><input type="radio" name="q15" value="B"> B. 腿疼</label>
+                <label class="option-label"><input type="radio" name="q15" value="C"> C. 肚子疼</label>
+                <label class="option-label"><input type="radio" name="q15" value="D"> D. 耳朵疼</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q16">
+            <div class="q-text"><span class="q-number">16.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q16" value="A"> A. 多喝水</label>
+                <label class="option-label"><input type="radio" name="q16" value="B"> B. 不用吃药</label>
+                <label class="option-label"><input type="radio" name="q16" value="C"> C. 少抽烟</label>
+                <label class="option-label"><input type="radio" name="q16" value="D"> D. 经常运动</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q17">
+            <div class="q-text"><span class="q-number">17.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q17" value="A"> A. 哭了</label>
+                <label class="option-label"><input type="radio" name="q17" value="B"> B. 饿了</label>
+                <label class="option-label"><input type="radio" name="q17" value="C"> C. 生病了</label>
+                <label class="option-label"><input type="radio" name="q17" value="D"> D. 没吃药</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q18">
+            <div class="q-text"><span class="q-number">18.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q18" value="A"> A. 饿了</label>
+                <label class="option-label"><input type="radio" name="q18" value="B"> B. 渴了</label>
+                <label class="option-label"><input type="radio" name="q18" value="C"> C. 感冒了</label>
+                <label class="option-label"><input type="radio" name="q18" value="D"> D. 肚子不舒服</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q19">
+            <div class="q-text"><span class="q-number">19.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q19" value="A"> A. 刮风了</label>
+                <label class="option-label"><input type="radio" name="q19" value="B"> B. 天气太干</label>
+                <label class="option-label"><input type="radio" name="q19" value="C"> C. 看电视太久</label>
+                <label class="option-label"><input type="radio" name="q19" value="D"> D. 长时间用电脑</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q20">
+            <div class="q-text"><span class="q-number">20.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q20" value="A"> A. 不用电脑</label>
+                <label class="option-label"><input type="radio" name="q20" value="B"> B. 注意休息</label>
+                <label class="option-label"><input type="radio" name="q20" value="C"> C. 少看电视</label>
+                <label class="option-label"><input type="radio" name="q20" value="D"> D. 多做运动</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q21">
+            <div class="q-text"><span class="q-number">21.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q21" value="A"> A. 休息好</label>
+                <label class="option-label"><input type="radio" name="q21" value="B"> B. 少抽烟</label>
+                <label class="option-label"><input type="radio" name="q21" value="C"> C. 幸福快乐</label>
+                <label class="option-label"><input type="radio" name="q21" value="D"> D. 身体不生病</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q22">
+            <div class="q-text"><span class="q-number">22.</span></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q22" value="A"> A. 身体好</label>
+                <label class="option-label"><input type="radio" name="q22" value="B"> B. 少生气</label>
+                <label class="option-label"><input type="radio" name="q22" value="C"> C. 身心健康</label>
+                <label class="option-label"><input type="radio" name="q22" value="D"> D. 精神健康</label>
+            </div>
+        </div>
+
+        <!-- ==================== 二、阅读 ==================== -->
+        <div class="section-title">二、阅读</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分 (第23-30题：选词填空)</div>
+
+        <div class="word-bank">A 数字 &nbsp;&nbsp;&nbsp; B 植物 &nbsp;&nbsp;&nbsp; C 肚子 &nbsp;&nbsp;&nbsp; D 坚持 &nbsp;&nbsp;&nbsp; E 超过</div>
+
+        <div class="question-card" id="card-q23">
+            <div class="q-text"><span class="q-number">23.</span> 我的（ &nbsp;&nbsp; ）在叫了，早上只吃了一小块儿蛋糕。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q23" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q23" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q23" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q23" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q23" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q24">
+            <div class="q-text"><span class="q-number">24.</span> 价格写 99.9 元，不写 100，这其实是在玩儿（ &nbsp;&nbsp; ）游戏。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q24" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q24" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q24" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q24" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q24" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q25">
+            <div class="q-text"><span class="q-number">25.</span> 身高没（ &nbsp;&nbsp; ）一米三免费，不用买票。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q25" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q25" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q25" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q25" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q25" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q26">
+            <div class="q-text"><span class="q-number">26.</span> 他们说的其实是同一种（ &nbsp;&nbsp; ）， simply只是在南方和北方有两个不同的名字。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q26" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q26" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q26" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q26" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q26" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="word-bank" style="margin-top: 20px;">A 严重 &nbsp;&nbsp;&nbsp; B 后悔 &nbsp;&nbsp;&nbsp; C 温度 &nbsp;&nbsp;&nbsp; D 抽烟 &nbsp;&nbsp;&nbsp; E 来不及</div>
+
+        <div class="question-card" id="card-q27">
+            <div class="q-text"><span class="q-number">27.</span> A: 你咳嗽好点儿了吗？医生怎么说？<br>B: 还是老样子，他让我以后不要再（ &nbsp;&nbsp; ）了。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q27" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q27" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q27" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q27" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q27" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q28">
+            <div class="q-text"><span class="q-number">28.</span> A: 我的感冒更（ &nbsp;&nbsp; ）了，我想明天请一天假。<br>B: 没问题。你最好去医院看一下。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q28" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q28" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q28" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q28" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q28" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q29">
+            <div class="q-text"><span class="q-number">29.</span> A: 最近我总是感冒，吃点儿什么药好？<br>B: 冬天这么冷你还穿裙子，能不感冒吗？别光想着漂亮，等身体出现问题了，（ &nbsp;&nbsp; ）就晚了。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q29" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q29" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q29" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q29" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q29" value="E"> E</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q30">
+            <div class="q-text"><span class="q-number">30.</span> A: 这个地方真大啊！咱们再去那边逛逛吧。<br>B: 估计（ &nbsp;&nbsp; ）了，旅游车马上就要回去了。</div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q30" value="A"> A</label>
+                <label class="option-label"><input type="radio" name="q30" value="B"> B</label>
+                <label class="option-label"><input type="radio" name="q30" value="C"> C</label>
+                <label class="option-label"><input type="radio" name="q30" value="D"> D</label>
+                <label class="option-label"><input type="radio" name="q30" value="E"> E</label>
+            </div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分 (第31-34题：排列顺序)</div>
+
+        <div class="question-card" id="card-q31">
+            <div class="q-text"><span class="q-number">31.</span><br>A 我晚点儿才能回去，桌子上有早上没吃完的面包<br>B 就先吃点儿<br>C 冰箱里还有面条，你要是饿了</div>
+            <input type="text" class="fill-input" id="q31" placeholder="请填写顺序，如: ACB">
+        </div>
+
+        <div class="question-card" id="card-q32">
+            <div class="q-text"><span class="q-number">32.</span><br>A 如果你没有准备好<br>B 它也会离开你去找别人<br>C 那么就算机会走到了你面前</div>
+            <input type="text" class="fill-input" id="q32" placeholder="请填写顺序，如: ACB">
+        </div>
+
+        <div class="question-card" id="card-q33">
+            <div class="q-text"><span class="q-number">33.</span><br>A 嘴上就会马上说出来<br>B 意思是说一个人心里有什么想法<br>C “心直口快”常用来说明人的性格</div>
+            <input type="text" class="fill-input" id="q33" placeholder="请填写顺序，如: CBA">
+        </div>
+
+        <div class="question-card" id="card-q34">
+            <div class="q-text"><span class="q-number">34.</span><br>A 秋冬季节，皮肤容易变得很干<br>B 这是让很多人烦恼的事<br>C 为了远离这个烦恼，要注意多喝水</div>
+            <input type="text" class="fill-input" id="q34" placeholder="请填写顺序，如: ABC">
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分 (第35-43题：请选出正确答案)</div>
+
+        <div class="question-card" id="card-q35">
+            <div class="q-text"><span class="q-number">35.</span> 医生提醒人们，在吃感冒药前，一定要认真看说明书。并且最好只选择一种感冒药，如果药物之间互相影响，可能会对健康不好。<br><strong>★ 医生一共有几个提醒？</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q35" value="A"> A. 一个</label>
+                <label class="option-label"><input type="radio" name="q35" value="B"> B. 两个</label>
+                <label class="option-label"><input type="radio" name="q35" value="C"> C. 三个</label>
+                <label class="option-label"><input type="radio" name="q35" value="D"> D. 四个</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q36">
+            <div class="q-text"><span class="q-number">36.</span> 没关系，不是很严重，不用住院，但是要注意多休息，不要太累。我再给你开点儿药，你要每天按时吃。<br><strong>★ 这句话最可能是谁说的？</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q36" value="A"> A. 售货员</label>
+                <label class="option-label"><input type="radio" name="q36" value="B"> B. 顾客</label>
+                <label class="option-label"><input type="radio" name="q36" value="C"> C. 大夫</label>
+                <label class="option-label"><input type="radio" name="q36" value="D"> D. 律师</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q37">
+            <div class="q-text"><span class="q-number">37.</span> 夏天空调不能开得太低，室内比室外低不要超过 7℃。不然，从室外进入室内，很容易感冒。<br><strong>★ 夏天空调开得太低，容易让人：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q37" value="A"> A. 生气</label>
+                <label class="option-label"><input type="radio" name="q37" value="B"> B. 生病</label>
+                <label class="option-label"><input type="radio" name="q37" value="C"> C. 牙疼</label>
+                <label class="option-label"><input type="radio" name="q37" value="D"> D. 难过</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q38">
+            <div class="q-text"><span class="q-number">38.</span> 人们一般认为，一个人每天的睡觉时间应保证 7 到 8 个小时。但也有人认为，如果只睡 5 到 6 个小时，你感觉也很好，就不需要睡更长时间。<br><strong>★ 根据这段话，睡觉时间：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q38" value="A"> A. 越长越好</label>
+                <label class="option-label"><input type="radio" name="q38" value="B"> B. 越短越好</label>
+                <label class="option-label"><input type="radio" name="q38" value="C"> C. 应保证 7 到 8 个小时</label>
+                <label class="option-label"><input type="radio" name="q38" value="D"> D. 人们看法不同</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q39">
+            <div class="q-text"><span class="q-number">39.</span> 人们常说“生命在于运动”，运动对身体健康非常重要。所以我们应该有按时锻炼的好习惯，打篮球、踢足球、跑步等都是不错的选择。<br><strong>★ 这段话主要谈：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q39" value="A"> A. 动作要标准</label>
+                <label class="option-label"><input type="radio" name="q39" value="B"> B. 应按时运动</label>
+                <label class="option-label"><input type="radio" name="q39" value="C"> C. 减肥的方法</label>
+                <label class="option-label"><input type="radio" name="q39" value="D"> D. 工作很重要</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q40">
+            <div class="q-text"><span class="q-number">40-41.</span> 以前的人认为胖是美的，现在的人却认为瘦是美的，所以美女的标准一直在变，但是不管什么时候，想要变美必须要先健康。如果没有了健康，也就没有了真正的美。所以，女孩子门在减肥的时候要记得，健康才是第一位的。<br><br><strong>★ 以前人们觉得什么样的女孩子更美？</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q40" value="A"> A. 胖的</label>
+                <label class="option-label"><input type="radio" name="q40" value="B"> B. 瘦的</label>
+                <label class="option-label"><input type="radio" name="q40" value="C"> C. 爱笑的</label>
+                <label class="option-label"><input type="radio" name="q40" value="D"> D. 安静的</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q41">
+            <div class="q-text"><strong>★ 这段话主要想告诉我们：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q41" value="A"> A. 要少吃饭</label>
+                <label class="option-label"><input type="radio" name="q41" value="B"> B. 要减肥</label>
+                <label class="option-label"><input type="radio" name="q41" value="C"> C. 健康最重要</label>
+                <label class="option-label"><input type="radio" name="q41" value="D"> D. 变美很难</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q42">
+            <div class="q-text"><span class="q-number">42-43.</span> 研究发现，久坐对人的身体健康有很大影响。医生提醒人们，每天静坐的时间最好不要超过 4 小时，如果超过 6 小时就会对身体非常不好。所以坐办公室的人和司机一定要注意，有时间就站起来活动活动，别等到身体出了问题再后悔。<br><br><strong>★ 静坐的时间最好：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q42" value="A"> A. 不要超过 6 小时</label>
+                <label class="option-label"><input type="radio" name="q42" value="B"> B. 4 到 6 个小时</label>
+                <label class="option-label"><input type="radio" name="q42" value="C"> C. 4 小时以内</label>
+                <label class="option-label"><input type="radio" name="q42" value="D"> D. 超过睡觉时间</label>
+            </div>
+        </div>
+
+        <div class="question-card" id="card-q43">
+            <div class="q-text"><strong>★ 科学家提醒人们：</strong></div>
+            <div class="options-grid">
+                <label class="option-label"><input type="radio" name="q43" value="A"> A. 要多散步</label>
+                <label class="option-label"><input type="radio" name="q43" value="B"> B. 不要久坐</label>
+                <label class="option-label"><input type="radio" name="q43" value="C"> C. 不要抽烟</label>
+                <label class="option-label"><input type="radio" name="q43" value="D"> D. 要常检查身体</label>
+            </div>
+        </div>
+
+        <!-- ==================== 三、书写 ==================== -->
+        <div class="section-title">三、书写</div>
+        <div class="part-title">第一部分 (第44-48题：完成句子)</div>
+
+        <div class="question-card" id="card-q44">
+            <div class="q-text"><span class="q-number">44.</span> 我 / 适应这里的 / 还不太 / 气候</div>
+            <input type="text" class="fill-input" id="q44" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q45">
+            <div class="q-text"><span class="q-number">45.</span> 那位病人 / 严重 / 的 / 情况 / 吗</div>
+            <input type="text" class="fill-input" id="q45" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q46">
+            <div class="q-text"><span class="q-number">46.</span> 你 / 关 / 把窗户 / 吗 / 了</div>
+            <input type="text" class="fill-input" id="q46" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q47">
+            <div class="q-text"><span class="q-number">47.</span> 好处 / 抽烟 / 身体 / 没有 / 对</div>
+            <input type="text" class="fill-input" id="q47" placeholder="请写出完整句子">
+        </div>
+
+        <div class="question-card" id="card-q48">
+            <div class="q-text"><span class="q-number">48.</span> 反对这样做 / 差不多 / 三分之二的人 / 有</div>
+            <input type="text" class="fill-input" id="q48" placeholder="请写出完整句子">
+        </div>
+
+        <div class="result-box" id="result-box"></div>
+
+        <div class="submit-container">
+            <button type="button" class="btn-submit" onclick="checkAnswers()">提交 (Nộp bài)</button>
+        </div>
+    </form>
+</div>
+
+<script>
+function checkAnswers() {
+    // Key đáp án chuẩn xác 100% theo đúng ảnh đáp án tham khảo
+    const answers = {
+        q1: '×', q2: '√', q3: '×', q4: '√', q5: '√',
+        q6: 'C', q7: 'D', q8: 'B', q9: 'A', q10: 'C', q11: 'A', q12: 'D',
+        q13: 'D', q14: 'B', q15: 'A', q16: 'A', q17: 'C', q18: 'D', q19: 'D', q20: 'B', q21: 'D', q22: 'C',
+        q23: 'C', q24: 'A', q25: 'E', q26: 'B',
+        q27: 'D', q28: 'A', q29: 'B', q30: 'E',
+        q31: 'ACB', q32: 'ACB', q33: 'CBA', q34: 'ABC',
+        q35: 'B', q36: 'C', q37: 'B', q38: 'D', q39: 'B', q40: 'A', q41: 'C', q42: 'C', q43: 'B',
+        q44: '我还不太适应这里的气候。',
+        q45: '那位病人的情况严重吗？',
+        q46: '你把窗户关了吗？',
+        q47: '抽烟对身体没有好处。',
+        q48: '差不多有三分之二的人反对这样做。'
+    };
+
+    let score = 0;
+    let total = Object.keys(answers).length;
+
+    for (let key in answers) {
+        let card = document.getElementById('card-' + key);
+        let isCorrect = false;
+
+        let radioChecked = document.querySelector(`input[name="${key}"]:checked`);
+        if (radioChecked) {
+            if (radioChecked.value === answers[key]) {
+                isCorrect = true;
+            }
+        } else {
+            let inputElem = document.getElementById(key);
+            if (inputElem) {
+                let userVal = inputElem.value.trim().replace(/\s+/g, '').replace(/[。,.?！!]/g, '');
+                let targetVal = answers[key].replace(/\s+/g, '').replace(/[。,.?！!]/g, '');
+                if (userVal.toUpperCase() === targetVal.toUpperCase()) {
+                    isCorrect = true;
+                }
+            }
+        }
+
+        if (isCorrect) {
+            score++;
+            if (card) {
+                card.style.border = '2px solid #48BB78';
+                card.style.backgroundColor = '#F0FFF4';
+            }
+        } else {
+            if (card) {
+                card.style.border = '2px solid #F56565';
+                card.style.backgroundColor = '#FFF5F5';
+            }
+        }
+    }
+
+    let resultBox = document.getElementById('result-box');
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `🎉 答题完成！(Hoàn thành bài làm)<br>📊 成绩 (Điểm số): <strong>${score} / ${total}</strong> 正确 (Câu đúng).`;
+    resultBox.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
