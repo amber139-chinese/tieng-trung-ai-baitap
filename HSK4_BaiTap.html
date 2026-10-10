@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK 4 · 第十一课 练习题（可打分）</title>
+  <style>
+    :root {
+      --primary: #1a5f7a;
+      --accent: #159895;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+      --ok: #16a34a;
+      --err: #dc2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      color: #1e293b;
+      background: #f1f5f9;
+      padding: 16px 10px 80px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 24px 28px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.55rem; font-weight: 700; }
+    header p { opacity: .9; margin-top: 4px; font-size: .92rem; }
+    nav {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 12px 16px; background: var(--light);
+      border-bottom: 1px solid var(--border); justify-content: center;
+    }
+    nav a {
+      text-decoration: none; color: var(--primary); font-weight: 600;
+      padding: 5px 12px; border-radius: 16px; background: #fff;
+      border: 1px solid var(--border); font-size: .85rem;
+    }
+    nav a:hover { background: var(--primary); color: #fff; }
+    section { padding: 22px 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 1.3rem; color: var(--primary); margin-bottom: 6px; display:flex; align-items:center; gap:8px; }
+    h2 .badge { background: var(--accent); color:#fff; font-size:.72rem; padding:2px 9px; border-radius:10px; }
+    h3 { font-size: 1.05rem; color:#334155; margin:18px 0 10px; padding-bottom:5px; border-bottom:2px solid var(--border); }
+    .instruction { background:#f0f9ff; border-left:4px solid var(--accent); padding:10px 14px; margin:10px 0 16px; border-radius:0 8px 8px 0; font-size:.93rem; }
+    .example { background:#f8fafc; border:1px dashed #94a3b8; padding:12px 16px; margin:12px 0; border-radius:10px; font-size:.9rem; }
+    .example .label { font-weight:700; color:var(--primary); margin-bottom:4px; }
+    .q {
+      margin:14px 0; padding:12px 14px; background:#fff;
+      border:1px solid var(--border); border-radius:10px; transition:.15s;
+    }
+    .q.correct { border-color: var(--ok); background:#f0fdf4; }
+    .q.wrong { border-color: var(--err); background:#fef2f2; }
+    .q-num { font-weight:700; color:var(--primary); margin-right:4px; }
+    .star { color:#f59e0b; }
+    .options { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:6px; margin-top:8px; }
+    .opt {
+      display:flex; align-items:center; gap:6px; padding:7px 10px;
+      background:#f8fafc; border-radius:8px; font-size:.9rem; cursor:pointer;
+      border:1px solid transparent;
+    }
+    .opt:hover { background:#e0f2fe; }
+    .opt input { accent-color: var(--accent); }
+    .blank-input {
+      display:inline-block; width:48px; text-align:center; font-weight:700;
+      border:none; border-bottom:2px solid #94a3b8; background:transparent;
+      color:var(--primary); font-size:1rem; margin:0 3px;
+    }
+    .blank-input:focus { outline:none; border-bottom-color:var(--accent); }
+    .order-input {
+      width:100%; max-width:180px; padding:8px 12px; border:1px solid var(--border);
+      border-radius:8px; font-size:1rem; font-weight:600; letter-spacing:2px;
+      text-transform:uppercase; text-align:center;
+    }
+    .order-input:focus { outline:none; border-color:var(--accent); }
+    .words { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px; }
+    .word { background:#e0f2fe; color:#0369a1; padding:5px 12px; border-radius:16px; font-weight:600; font-size:.88rem; }
+    .order-box { display:flex; flex-direction:column; gap:6px; margin:8px 0; }
+    .order-item { background:#f1f5f9; padding:7px 12px; border-radius:8px; border:1px solid var(--border); font-size:.9rem; }
+    .sentence-words { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+    .sw { background:#fef3c7; padding:5px 10px; border-radius:6px; font-size:.92rem; }
+    .audio-box {
+      background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4;
+      border-radius:12px; padding:14px 18px; margin:12px 0 18px;
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .audio-box audio { flex:1; min-width:200px; height:38px; }
+    .audio-label { font-weight:600; color:#0f766e; white-space:nowrap; }
+    .score-bar {
+      position:sticky; bottom:0; background:#fff; border-top:2px solid var(--border);
+      padding:14px 20px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;
+      box-shadow:0 -4px 16px rgba(0,0,0,.06); z-index:50;
+    }
+    .btn {
+      padding:10px 28px; border:none; border-radius:24px; font-size:1rem;
+      font-weight:700; cursor:pointer; transition:.2s;
+    }
+    .btn-score { background:var(--primary); color:#fff; }
+    .btn-score:hover { background:#134e63; }
+    .btn-reset { background:#e2e8f0; color:#334155; }
+    .btn-reset:hover { background:#cbd5e1; }
+    #resultBox {
+      display:none; margin:20px 24px; padding:20px; border-radius:12px;
+      background:linear-gradient(135deg,#f0f9ff,#ecfdf5); border:1px solid #99f6e4;
+    }
+    #resultBox.show { display:block; }
+    .score-num { font-size:2rem; font-weight:800; color:var(--primary); }
+    .transcript {
+      display:none; margin-top:16px; padding:14px; background:#fff;
+      border-radius:10px; border:1px solid var(--border); font-size:.9rem;
+    }
+    .transcript.show { display:block; }
+    .transcript h4 { color:var(--primary); margin-bottom:8px; }
+    .transcript p { margin:6px 0; }
+    .feedback { font-size:.85rem; margin-top:4px; }
+    .feedback.ok { color:var(--ok); }
+    .feedback.err { color:var(--err); }
+    footer { text-align:center; padding:16px; color:#64748b; font-size:.82rem; background:var(--light); }
+    @media(max-width:600px){
+      section{padding:16px 12px;}
+      .options{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>第十一课　读书好，读好书，好读书</h1>
+    <p>HSK 4 练习题 · 可打分 · 听力含原文</p>
+  </header>
+
+  <nav>
+    <a href="#listening1">听力一</a>
+    <a href="#listening2">听力二</a>
+    <a href="#listening3">听力三</a>
+    <a href="#reading1">阅读一</a>
+    <a href="#reading2">阅读二</a>
+    <a href="#reading3">阅读三</a>
+    <a href="#writing">书写</a>
+  </nav>
+
+  <!-- ========== 听力 ========== -->
+  <section id="listening">
+    <h2>一、听 力 <span class="badge">Listening</span></h2>
+
+    <!-- 第一部分 -->
+    <div id="listening1">
+      <h3>第一部分　11-1</h3>
+      <div class="audio-box">
+        <span class="audio-label">🎧 11-1</span>
+        <audio controls src="11-1.mp3">您的浏览器不支持音频。</audio>
+      </div>
+      <div class="instruction">第 1–5 题：判断对错（√ / ×）</div>
+
+      <div class="example">
+        <div class="label">例如：</div>
+        我想去办个信用卡，今天下午你有时间吗？陪我去一趟银行？<br>
+        <span class="star">★</span> 他打算下午去银行。　(√)<br><br>
+        现在我很少看电视……浪费我的时间。<br>
+        <span class="star">★</span> 他喜欢看电视广告。　(×)
+      </div>
+
+      <div class="q" data-ans="√" data-part="L1">
+        <span class="q-num">1.</span>
+        <span class="star">★</span> 大多数孩子喜欢爸爸给他读书。
+        <div class="options">
+          <label class="opt"><input type="radio" name="q1" value="√"> √ 对</label>
+          <label class="opt"><input type="radio" name="q1" value="×"> × 错</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="√" data-part="L1">
+        <span class="q-num">2.</span>
+        <span class="star">★</span> 他被那个故事感动了。
+        <div class="options">
+          <label class="opt"><input type="radio" name="q2" value="√"> √ 对</label>
+          <label class="opt"><input type="radio" name="q2" value="×"> × 错</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="√" data-part="L1">
+        <span class="q-num">3.</span>
+        <span class="star">★</span> 要多跟人交流。
+        <div class="options">
+          <label class="opt"><input type="radio" name="q3" value="√"> √ 对</label>
+          <label class="opt"><input type="radio" name="q3" value="×"> × 错</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="×" data-part="L1">
+        <span class="q-num">4.</span>
+        <span class="star">★</span> 他现在是翻译。
+        <div class="options">
+          <label class="opt"><input type="radio" name="q4" value="√"> √ 对</label>
+          <label class="opt"><input type="radio" name="q4" value="×"> × 错</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="√" data-part="L1">
+        <span class="q-num">5.</span>
+        <span class="star">★</span> 老师让大家留下美好的回忆。
+        <div class="options">
+          <label class="opt"><input type="radio" name="q5" value="√"> √ 对</label>
+          <label class="opt"><input type="radio" name="q5" value="×"> × 错</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="transcript" id="trans1">
+        <h4>📜 听力原文 · 第一部分</h4>
+        <p><strong>1.</strong> 这次调查发现，超过 70% 的儿童更愿意让爸爸给自己读书。为什么会出现这种情况？可能是因为父亲平时陪孩子玩儿的时间太少。<br>
+        <span class="star">★</span> 大多数孩子喜欢爸爸给他读书。 → <b>√ 对</b></p>
+        <p><strong>2.</strong> 等车的时候，我随便买了本杂志，看了没几页，就看到一个小故事，虽然这个故事不长，但是写得却很好，让我很感动。<br>
+        <span class="star">★</span> 他被那个故事感动了。 → <b>√ 对</b></p>
+        <p><strong>3.</strong> 多与人交流当然有很多好处。通过交流，你不但可以增加对别人的了解，而且可以从不同的人那里得到不同的知识、经验、快乐等。<br>
+        <span class="star">★</span> 要多跟人交流。 → <b>√ 对</b></p>
+        <p><strong>4.</strong> 经过这段时间的学习，他的汉语水平提高了不少，不但可以听懂一些较短的句子，还可以进行简单的交流，现在即使不用翻译也能理解是什么意思了。<br>
+        <span class="star">★</span> 他现在是翻译。 → <b>× 错</b>（他现在已经不需要翻译了）</p>
+        <p><strong>5.</strong> 老教授对新生说：“从今天起，如果你每天用 100 个字把自己的生活写下来，毕业时你将会得到一本 10 多万字的书，内容就是你 4 年大学生活的美好回忆。”<br>
+        <span class="star">★</span> 老师让大家留下美好的回忆。 → <b>√ 对</b></p>
+      </div>
+    </div>
+
+    <!-- 第二部分 -->
+    <div id="listening2">
+      <h3>第二部分　11-2</h3>
+      <div class="audio-box">
+        <span class="audio-label">🎧 11-2</span>
+        <audio controls src="11-2.mp3">您的浏览器不支持音频。</audio>
+      </div>
+      <div class="instruction">第 6–12 题：请选出正确答案</div>
+
+      <div class="q" data-ans="C" data-part="L2">
+        <span class="q-num">6.</span> 男的认为考大学什么最重要？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q6" value="A"> A 专业</label>
+          <label class="opt"><input type="radio" name="q6" value="B"> B 学校</label>
+          <label class="opt"><input type="radio" name="q6" value="C"> C 兴趣</label>
+          <label class="opt"><input type="radio" name="q6" value="D"> D 老师</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L2">
+        <span class="q-num">7.</span> 女的为什么不会做这个题？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q7" value="A"> A 很复杂</label>
+          <label class="opt"><input type="radio" name="q7" value="B"> B 不会猜</label>
+          <label class="opt"><input type="radio" name="q7" value="C"> C 没听懂</label>
+          <label class="opt"><input type="radio" name="q7" value="D"> D 没人教</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="D" data-part="L2">
+        <span class="q-num">8.</span> 女的在找什么？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q8" value="A"> A 手机</label>
+          <label class="opt"><input type="radio" name="q8" value="B"> B 关教授</label>
+          <label class="opt"><input type="radio" name="q8" value="C"> C 笔记</label>
+          <label class="opt"><input type="radio" name="q8" value="D"> D 电话号码</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L2">
+        <span class="q-num">9.</span> 女的是什么意思？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q9" value="A"> A 面试很重要</label>
+          <label class="opt"><input type="radio" name="q9" value="B"> B 不用担心面试</label>
+          <label class="opt"><input type="radio" name="q9" value="C"> C 不能改变顺序</label>
+          <label class="opt"><input type="radio" name="q9" value="D"> D 下次早点儿来</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="L2">
+        <span class="q-num">10.</span> 男的为什么向女的借笔记？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q10" value="A"> A 没去上课</label>
+          <label class="opt"><input type="radio" name="q10" value="B"> B 没记准新词</label>
+          <label class="opt"><input type="radio" name="q10" value="C"> C 没听懂语法</label>
+          <label class="opt"><input type="radio" name="q10" value="D"> D 没带笔记</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L2">
+        <span class="q-num">11.</span> 女的什么意思？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q11" value="A"> A 小说很贵</label>
+          <label class="opt"><input type="radio" name="q11" value="B"> B 应该买报纸</label>
+          <label class="opt"><input type="radio" name="q11" value="C"> C 男的不爱看书</label>
+          <label class="opt"><input type="radio" name="q11" value="D"> D 书在桌子上</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="A" data-part="L2">
+        <span class="q-num">12.</span> 女的是什么意思？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q12" value="A"> A 结果不重要</label>
+          <label class="opt"><input type="radio" name="q12" value="B"> B 比赛有意思</label>
+          <label class="opt"><input type="radio" name="q12" value="C"> C 没赢很难过</label>
+          <label class="opt"><input type="radio" name="q12" value="D"> D 时间来得及</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="transcript" id="trans2">
+        <h4>📜 听力原文 · 第二部分</h4>
+        <p><strong>6.</strong> 女：我女儿明年要考大学了，你觉得是学校重要还是专业重要？<br>
+        男：我觉得主要得考虑孩子喜欢学什么。<br>
+        问：男的认为考大学什么最重要？ → <b>C 兴趣</b></p>
+        <p><strong>7.</strong> 男：这个填空题不是很复杂，你再好好想一下。<br>
+        女：今天上课的时候我没听懂，而且填空题连猜都没办法猜，你教我怎么做吧。<br>
+        问：女的为什么不会做这个题？ → <b>C 没听懂</b></p>
+        <p><strong>8.</strong> 女：我记得上次关教授把他的手机号码给我了，可是不知道写哪儿了。<br>
+        男：你当时好像是在记笔记，你看看是不是写在那儿上面了。<br>
+        问：女的在找什么？ → <b>D 电话号码</b></p>
+        <p><strong>9.</strong> 男：您好，请问我能换一下面试的时间吗？我家里突然有点儿急事儿。<br>
+        女：对不起，先生，面试都是按顺序安排好的。<br>
+        问：女的是什么意思？ → <b>C 不能改变顺序</b></p>
+        <p><strong>10.</strong> 男：英语课笔记能借我看一下吗？昨天课上增加了好多新词，我记得不太准确。<br>
+        女：可以，最后几页都是昨天课上讲的主要的词语和语法内容。<br>
+        问：男的为什么向女的借笔记？ → <b>B 没记准新词</b></p>
+        <p><strong>11.</strong> 男：我昨天买的那本小说哪儿去了？我记得放在桌子上了。<br>
+        女：奇怪，你一般连报纸都不买，什么时候开始有兴趣看书了啊？<br>
+        问：女的什么意思？ → <b>C 男的不爱看书</b></p>
+        <p><strong>12.</strong> 男：只差一点儿就赢了，他现在肯定很难过。<br>
+        女：他已经打出了自己最好的水平，无论结果怎么样，我们都应该为他高兴。<br>
+        问：女的是什么意思？ → <b>A 结果不重要</b></p>
+      </div>
+    </div>
+
+    <!-- 第三部分 -->
+    <div id="listening3">
+      <h3>第三部分　11-3</h3>
+      <div class="audio-box">
+        <span class="audio-label">🎧 11-3</span>
+        <audio controls src="11-3.mp3">您的浏览器不支持音频。</audio>
+      </div>
+      <div class="instruction">第 13–22 题：请选出正确答案</div>
+
+      <div class="q" data-ans="B" data-part="L3">
+        <span class="q-num">13.</span> 那个题怎么了？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q13" value="A"> A 比较难</label>
+          <label class="opt"><input type="radio" name="q13" value="B"> B 应该改</label>
+          <label class="opt"><input type="radio" name="q13" value="C"> C 可以猜</label>
+          <label class="opt"><input type="radio" name="q13" value="D"> D 没问题</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="L3">
+        <span class="q-num">14.</span> 关于男的，可以知道：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q14" value="A"> A 汉语说得不太好</label>
+          <label class="opt"><input type="radio" name="q14" value="B"> B 知道很多汉语词</label>
+          <label class="opt"><input type="radio" name="q14" value="C"> C 觉得女的很厉害</label>
+          <label class="opt"><input type="radio" name="q14" value="D"> D 刚刚开始学汉语</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L3">
+        <span class="q-num">15.</span> 男的认为应该怎么复习？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q15" value="A"> A 用很长时间</label>
+          <label class="opt"><input type="radio" name="q15" value="B"> B 多看材料</label>
+          <label class="opt"><input type="radio" name="q15" value="C"> C 复习主要的</label>
+          <label class="opt"><input type="radio" name="q15" value="D"> D 注意语法</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L3">
+        <span class="q-num">16.</span> 妈妈让孩子做什么？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q16" value="A"> A 讲故事</label>
+          <label class="opt"><input type="radio" name="q16" value="B"> B 做蛋糕</label>
+          <label class="opt"><input type="radio" name="q16" value="C"> C 看完书</label>
+          <label class="opt"><input type="radio" name="q16" value="D"> D 做计划</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="A" data-part="L3">
+        <span class="q-num">17.</span> 女的找李校长做什么？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q17" value="A"> A 送材料</label>
+          <label class="opt"><input type="radio" name="q17" value="B"> B 取报纸</label>
+          <label class="opt"><input type="radio" name="q17" value="C"> C 还杂志</label>
+          <label class="opt"><input type="radio" name="q17" value="D"> D 送礼物</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L3">
+        <span class="q-num">18.</span> 这个杂志没有以下哪个特点？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q18" value="A"> A 内容精彩</label>
+          <label class="opt"><input type="radio" name="q18" value="B"> B 图片漂亮</label>
+          <label class="opt"><input type="radio" name="q18" value="C"> C 价格便宜</label>
+          <label class="opt"><input type="radio" name="q18" value="D"> D 很吸引人</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="L3">
+        <span class="q-num">19.</span> 根据这段话，新闻工作者要学会什么？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q19" value="A"> A 获得机会</label>
+          <label class="opt"><input type="radio" name="q19" value="B"> B 选择新闻</label>
+          <label class="opt"><input type="radio" name="q19" value="C"> C 关心大家</label>
+          <label class="opt"><input type="radio" name="q19" value="D"> D 及时看报</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="D" data-part="L3">
+        <span class="q-num">20.</span> 根据这段话，哪些消息应该写在报纸上？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q20" value="A"> A 所有的消息</label>
+          <label class="opt"><input type="radio" name="q20" value="B"> B 刚获得的消息</label>
+          <label class="opt"><input type="radio" name="q20" value="C"> C 生活中的事</label>
+          <label class="opt"><input type="radio" name="q20" value="D"> D 大家关心的热点</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="L3">
+        <span class="q-num">21.</span> 关于说话人，下列哪个正确？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q21" value="A"> A 很诚实</label>
+          <label class="opt"><input type="radio" name="q21" value="B"> B 汉语很好</label>
+          <label class="opt"><input type="radio" name="q21" value="C"> C 想当翻译</label>
+          <label class="opt"><input type="radio" name="q21" value="D"> D 爱开玩笑</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="L3">
+        <span class="q-num">22.</span> 遇到不认识的词，说话人会怎么办？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q22" value="A"> A 问同学</label>
+          <label class="opt"><input type="radio" name="q22" value="B"> B 问老师</label>
+          <label class="opt"><input type="radio" name="q22" value="C"> C 查词典</label>
+          <label class="opt"><input type="radio" name="q22" value="D"> D 放在一边</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="transcript" id="trans3">
+        <h4>📜 听力原文 · 第三部分</h4>
+        <p><strong>13.</strong> 女：那个题的答案有问题吧？<br>
+        男：你是说那个填空题吗？<br>
+        女：是啊，这里填“举办”、“举行”都可以。<br>
+        男：对，这个题有问题，得重新改改。<br>
+        问：那个题怎么了？ → <b>B 应该改</b></p>
+        <p><strong>14.</strong> 女：你的汉语说得很流利，词语用得很丰富。<br>
+        男：真的吗？谢谢！其实没你说得那么厉害。<br>
+        女：你学汉语多长时间了？<br>
+        男：差不多有三年了吧。<br>
+        问：关于男的，可以知道： → <b>B 知道很多汉语词</b></p>
+        <p><strong>15.</strong> 男：复习得怎么样了？<br>
+        女：材料这么多，我估计看不完了。<br>
+        男：来得及，复习要注意方法，看主要内容。<br>
+        女：只能这样了，这些语法知识太难了。<br>
+        问：男的认为应该怎么复习？ → <b>C 复习主要的</b></p>
+        <p><strong>16.</strong> 男：妈妈，后面这几页书我明天再看行吗？<br>
+        女：别养成坏习惯，记住，今天能完成的事情一定不要留到明天做。<br>
+        男：那您快把刚才没吃完的蛋糕拿出来，我现在就把它吃光！<br>
+        女：你这孩子，就知道吃。<br>
+        问：妈妈让孩子做什么？ → <b>C 看完书</b></p>
+        <p><strong>17.</strong> 女：打扰一下，请问李校长在吗？<br>
+        男：他去吃午饭了，您有什么事情吗？<br>
+        女：我有些材料要交给他，你知道他什么时候回来吗？<br>
+        男：他应该很快就会回来了，您等等他吧。<br>
+        问：女的找李校长做什么？ → <b>A 送材料</b></p>
+        <p><strong>18.</strong> 女：现在哪种体育杂志比较好看呢？<br>
+        男：你知道《体育世界》吗？那个杂志的内容比较精彩，图片很漂亮，很吸引人。<br>
+        女：我怎么听说买那本杂志的人很少呢？<br>
+        男：主要是它价格定得太高。不少人虽然喜欢，但因为觉得太贵只好放弃了。<br>
+        问：这个杂志没有以下哪个特点？ → <b>C 价格便宜</b></p>
+        <p><strong>19–20.</strong> 对新闻工作者来说，获得及时准确的消息特别重要。除此之外，还要学会选择，因为生活中每天都会发生各种各样的事情，但不是所有的都值得写在报纸上，只有那些热点问题才会得到大家的注意和关心。<br>
+        19. 新闻工作者要学会什么？ → <b>B 选择新闻</b><br>
+        20. 哪些消息应该写在报纸上？ → <b>D 大家关心的热点</b></p>
+        <p><strong>21–22.</strong> 我来中国差不多一年了，大家都说我的中文很流利。有不少人问我是怎么做到的，其实我的方法很简单，就是多交一些中国朋友，经常和他们聊天儿。还有，遇到不认识的词语，我会马上查词典，然后写在笔记本上，有空儿就复习复习。这样慢慢积累，我的听说读写能力都得到了很大的提高。<br>
+        21. 关于说话人，下列哪个正确？ → <b>B 汉语很好</b><br>
+        22. 遇到不认识的词，说话人会怎么办？ → <b>C 查词典</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 阅读 ========== -->
+  <section id="reading">
+    <h2>二、阅 读 <span class="badge">Reading</span></h2>
+
+    <div id="reading1">
+      <h3>第一部分　选词填空（23–26）</h3>
+      <div class="words">
+        <span class="word">A 否则</span>
+        <span class="word">B 只好</span>
+        <span class="word">C 看法</span>
+        <span class="word">D 坚持</span>
+        <span class="word">E 然而</span>
+      </div>
+      <div class="q" data-ans="B" data-part="R1">
+        <span class="q-num">23.</span>
+        我们原计划去打篮球的，可是忽然刮起了大风，现在（
+        <input class="blank-input" name="q23" maxlength="1" placeholder="?">
+        ）留在家里上网了。
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="R1">
+        <span class="q-num">24.</span>
+        我跟你的（
+        <input class="blank-input" name="q24" maxlength="1" placeholder="?">
+        ）正好相反，感觉什么都说了，却都只说了一点点。
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="E" data-part="R1">
+        <span class="q-num">25.</span>
+        笨人总是把简单的问题说复杂，（
+        <input class="blank-input" name="q25" maxlength="1" placeholder="?">
+        ），聪明人却能把复杂的问题解释得清楚而简单。
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="A" data-part="R1">
+        <span class="q-num">26.</span>
+        我建议你暂时先别考虑出国留学，至少你得先把外语学好，（
+        <input class="blank-input" name="q26" maxlength="1" placeholder="?">
+        ），在国外和人交流都会有困难。
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <div id="reading2">
+      <h3>第二部分　选词填空（27–30）</h3>
+      <div class="words">
+        <span class="word">A 猜</span>
+        <span class="word">B 顺序</span>
+        <span class="word">C 温度</span>
+        <span class="word">D 厉害</span>
+        <span class="word">E 著名</span>
+      </div>
+      <div class="q" data-ans="B" data-part="R2">
+        <span class="q-num">27.</span>
+        A：小高，你把这些材料按照时间（
+        <input class="blank-input" name="q27" maxlength="1" placeholder="?">
+        ）放好，下班前交给我就行。<br>
+        B：没问题，弄完后我就送到您办公室。
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="D" data-part="R2">
+        <span class="q-num">28.</span>
+        A：他的汉语说得很流利，真让人羡慕。<br>
+        B：他是翻译，当然很（
+        <input class="blank-input" name="q28" maxlength="1" placeholder="?">
+        ）。
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="A" data-part="R2">
+        <span class="q-num">29.</span>
+        A：对不起，刚才我在会议室开会，没办法接电话。<br>
+        B：没关系，我（
+        <input class="blank-input" name="q29" maxlength="1" placeholder="?">
+        ）你也在忙，没打扰你吧？
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="E" data-part="R2">
+        <span class="q-num">30.</span>
+        A：老王，我今晚要加班，这张票浪费了就可惜了，要不你去看吧。<br>
+        B：太谢谢你了！听说这次演出邀请了许多（
+        <input class="blank-input" name="q30" maxlength="1" placeholder="?">
+        ）的演员，很精彩的。
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <div id="reading3">
+      <h3>第三部分 · 排列顺序（31–34）</h3>
+      <div class="instruction">请把正确的顺序填入下方输入框（例如输入 BAC）。<strong style="color:#dc2626;">绝对不要显示答案提示，自己判断！</strong></div>
+
+      <div class="q" data-ans="ACB" data-part="R3">
+        <span class="q-num">31.</span>
+        <div class="order-box">
+          <div class="order-item">A 我们身边的图书越来越多</div>
+          <div class="order-item">B 只好选择其中特别感兴趣的来阅读</div>
+          <div class="order-item">C 而每个人时间是有限的</div>
+        </div>
+        顺序：<input class="order-input" name="q31" maxlength="3" placeholder="ABC" autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="CBA" data-part="R3">
+        <span class="q-num">32.</span>
+        <div class="order-box">
+          <div class="order-item">A 否则读书对自己就没有什么帮助了</div>
+          <div class="order-item">B 不能完全相信书本</div>
+          <div class="order-item">C 看书时应该有自己的想法和判断</div>
+        </div>
+        顺序：<input class="order-input" name="q32" maxlength="3" placeholder="ABC" autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="BAC" data-part="R3">
+        <span class="q-num">33.</span>
+        <div class="order-box">
+          <div class="order-item">A 有些书可以很快地读</div>
+          <div class="order-item">B 读书应该有选择</div>
+          <div class="order-item">C 然而，有些书却需要多花时间来认真读</div>
+        </div>
+        顺序：<input class="order-input" name="q33" maxlength="3" placeholder="ABC" autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="CAB" data-part="R3">
+        <span class="q-num">34.</span>
+        <div class="order-box">
+          <div class="order-item">A 这样不但能使学生增长知识</div>
+          <div class="order-item">B 还能提高他们的理解能力和写作水平</div>
+          <div class="order-item">C 养成课外阅读的习惯很重要</div>
+        </div>
+        顺序：<input class="order-input" name="q34" maxlength="3" placeholder="ABC" autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>第三部分 · 阅读理解（35–43）</h3>
+
+      <div class="q" data-ans="C" data-part="R4">
+        <span class="q-num">35.</span>
+        他总说自己特别喜欢看书，可是这本书他看了一个月才看到第 5 页……一个真正爱看书的人总能找出时间来阅读。<br>
+        <span class="star">★</span> 根据这段话，可以知道他：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q35" value="A"> A 看书很认真</label>
+          <label class="opt"><input type="radio" name="q35" value="B"> B 工作很忙</label>
+          <label class="opt"><input type="radio" name="q35" value="C"> C 不是真正爱看书</label>
+          <label class="opt"><input type="radio" name="q35" value="D"> D 没有时间看书</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="R4">
+        <span class="q-num">36.</span>
+        我刚刚收到王校长发给我的电子邮件……但他还是坚持工作，翻译了一本关于中国历史的书。<br>
+        <span class="star">★</span> 根据这段话，可以知道王校长：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q36" value="A"> A 身体一直很好</label>
+          <label class="opt"><input type="radio" name="q36" value="B"> B 工作很努力</label>
+          <label class="opt"><input type="radio" name="q36" value="C"> C 电子邮件很多</label>
+          <label class="opt"><input type="radio" name="q36" value="D"> D 爱读中国历史</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="R4">
+        <span class="q-num">37.</span>
+        3 月 7 日上午，我在体育馆打羽毛球时，丢了一个咖啡色书包……请拿到包的人与我联系。非常感谢！<br>
+        <span class="star">★</span> 这个人写这段话是为了：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q37" value="A"> A 表示感谢</label>
+          <label class="opt"><input type="radio" name="q37" value="B"> B 想打羽毛球</label>
+          <label class="opt"><input type="radio" name="q37" value="C"> C 找他的东西</label>
+          <label class="opt"><input type="radio" name="q37" value="D"> D 介绍他的书包</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="A" data-part="R4">
+        <span class="q-num">38.</span>
+        让人想不到的是，这本小说的作者竟然是位 80 后的年轻人……但他对生活的认识却比这个年龄的人深得多。<br>
+        <span class="star">★</span> 这本小说的作者：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q38" value="A"> A 对生活认识很深</label>
+          <label class="opt"><input type="radio" name="q38" value="B"> B 喜爱高中的生活</label>
+          <label class="opt"><input type="radio" name="q38" value="C"> C 写书时高中毕业了</label>
+          <label class="opt"><input type="radio" name="q38" value="D"> D 已经 80 岁了</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="R4">
+        <span class="q-num">39.</span>
+        我最喜欢读的就是这份报纸，它的内容非常丰富，同时，广告也很少……经济方面的新闻对我的工作很有帮助。<br>
+        <span class="star">★</span> 他喜欢这份报纸的原因之一是：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q39" value="A"> A 免费</label>
+          <label class="opt"><input type="radio" name="q39" value="B"> B 价格低</label>
+          <label class="opt"><input type="radio" name="q39" value="C"> C 广告少</label>
+          <label class="opt"><input type="radio" name="q39" value="D"> D 笑话多</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="D" data-part="R4">
+        <span class="q-num">40.</span>
+        有位名人说：“要想知道自己长得什么样……以那些说真话的人为‘镜子’……”<br>
+        <span class="star">★</span> 根据这段话，哪种人是我们的“镜子”？
+        <div class="options">
+          <label class="opt"><input type="radio" name="q40" value="A"> A 爱买衣服的人</label>
+          <label class="opt"><input type="radio" name="q40" value="B"> B 爱照镜子的人</label>
+          <label class="opt"><input type="radio" name="q40" value="C"> C 爱聊天儿的人</label>
+          <label class="opt"><input type="radio" name="q40" value="D"> D 说真话的人</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="R4">
+        <span class="q-num">41.</span>
+        <span class="star">★</span> 这段话主要说：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q41" value="A"> A 人和人的关系</label>
+          <label class="opt"><input type="radio" name="q41" value="B"> B 怎么发现缺点</label>
+          <label class="opt"><input type="radio" name="q41" value="C"> C 买衣服的条件</label>
+          <label class="opt"><input type="radio" name="q41" value="D"> D 照镜子的方法</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="B" data-part="R4">
+        <span class="q-num">42.</span>
+        关于读书，有两点必须要注意：第一，应该养成爱阅读的好习惯……第二，自己不花时间去想，完全相信并且接受书上写的，这是不对的……<br>
+        <span class="star">★</span> 阅读可以使人：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q42" value="A"> A 很快变富</label>
+          <label class="opt"><input type="radio" name="q42" value="B"> B 增加知识</label>
+          <label class="opt"><input type="radio" name="q42" value="C"> C 更有耐心</label>
+          <label class="opt"><input type="radio" name="q42" value="D"> D 变得有计划</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+      <div class="q" data-ans="C" data-part="R4">
+        <span class="q-num">43.</span>
+        <span class="star">★</span> 根据这段话，读书要：
+        <div class="options">
+          <label class="opt"><input type="radio" name="q43" value="A"> A 相信写书的人</label>
+          <label class="opt"><input type="radio" name="q43" value="B"> B 多做读书笔记</label>
+          <label class="opt"><input type="radio" name="q43" value="C"> C 有自己的看法</label>
+          <label class="opt"><input type="radio" name="q43" value="D"> D 经常帮助别人</label>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 书写 ========== -->
+  <section id="writing">
+    <h2>三、书 写 <span class="badge">Writing</span></h2>
+    <h3>第一部分　完成句子（44–48）</h3>
+    <div class="instruction">把词语排列成正确的句子</div>
+
+    <div class="q" data-ans="你在使用之前要仔细阅读说明书。" data-part="W">
+      <span class="q-num">44.</span>
+      <div class="sentence-words">
+        <span class="sw">你在</span><span class="sw">说明书</span><span class="sw">要</span><span class="sw">使用</span><span class="sw">之前</span><span class="sw">仔细阅读</span>
+      </div>
+      <input type="text" class="order-input" style="max-width:100%;width:100%;margin-top:8px;text-align:left;letter-spacing:0;" name="q44" placeholder="写出完整句子">
+      <div class="feedback"></div>
+    </div>
+    <div class="q" data-ans="这本小说一共二百多页。" data-part="W">
+      <span class="q-num">45.</span>
+      <div class="sentence-words">
+        <span class="sw">页</span><span class="sw">这本</span><span class="sw">一共</span><span class="sw">多</span><span class="sw">小说</span><span class="sw">二百</span>
+      </div>
+      <input type="text" class="order-input" style="max-width:100%;width:100%;margin-top:8px;text-align:left;letter-spacing:0;" name="q45" placeholder="写出完整句子">
+      <div class="feedback"></div>
+    </div>
+    <div class="q" data-ans="我们把简单的事情想复杂了。" data-part="W">
+      <span class="q-num">46.</span>
+      <div class="sentence-words">
+        <span class="sw">我们</span><span class="sw">想复杂</span><span class="sw">了</span><span class="sw">把</span><span class="sw">简单的</span><span class="sw">事情</span>
+      </div>
+      <input type="text" class="order-input" style="max-width:100%;width:100%;margin-top:8px;text-align:left;letter-spacing:0;" name="q46" placeholder="写出完整句子">
+      <div class="feedback"></div>
+    </div>
+    <div class="q" data-ans="很多人开始注意那篇文章。" data-part="W">
+      <span class="q-num">47.</span>
+      <div class="sentence-words">
+        <span class="sw">很多</span><span class="sw">开始</span><span class="sw">那篇</span><span class="sw">注意</span><span class="sw">文章</span><span class="sw">人</span>
+      </div>
+      <input type="text" class="order-input" style="max-width:100%;width:100%;margin-top:8px;text-align:left;letter-spacing:0;" name="q47" placeholder="写出完整句子">
+      <div class="feedback"></div>
+    </div>
+    <div class="q" data-ans="这种方法能有效地减轻压力。" data-part="W">
+      <span class="q-num">48.</span>
+      <div class="sentence-words">
+        <span class="sw">这种</span><span class="sw">能</span><span class="sw">减轻</span><span class="sw">方法</span><span class="sw">有效地</span><span class="sw">压力</span>
+      </div>
+      <input type="text" class="order-input" style="max-width:100%;width:100%;margin-top:8px;text-align:left;letter-spacing:0;" name="q48" placeholder="写出完整句子">
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <div id="resultBox">
+    <div style="text-align:center;">
+      <div>总分</div>
+      <div class="score-num" id="totalScore">0 / 48</div>
+      <div id="scoreDetail" style="margin-top:8px;font-size:.95rem;"></div>
+    </div>
+  </div>
+
+  <footer>
+    第十一课 · 读书好，读好书，好读书<br>
+    上传 GitHub 时请把 <code>11-1.mp3</code>、<code>11-2.mp3</code>、<code>11-3.mp3</code> 与本 HTML 放在同一文件夹
+  </footer>
+</div>
+
+<div class="score-bar">
+  <button class="btn btn-score" onclick="grade()">✅ 打分 / Chấm điểm</button>
+  <button class="btn btn-reset" onclick="resetAll()">🔄 重置</button>
+</div>
+
+<script>
+  const answers = {
+    q1:'√', q2:'√', q3:'√', q4:'×', q5:'√',
+    q6:'C', q7:'C', q8:'D', q9:'C', q10:'B', q11:'C', q12:'A',
+    q13:'B', q14:'B', q15:'C', q16:'C', q17:'A', q18:'C', q19:'B', q20:'D', q21:'B', q22:'C',
+    q23:'B', q24:'C', q25:'E', q26:'A',
+    q27:'B', q28:'D', q29:'A', q30:'E',
+    q31:'ACB', q32:'CBA', q33:'BAC', q34:'CAB',
+    q35:'C', q36:'B', q37:'C', q38:'A', q39:'C', q40:'D', q41:'B', q42:'B', q43:'C',
+    q44:'你在使用之前要仔细阅读说明书。',
+    q45:'这本小说一共二百多页。',
+    q46:'我们把简单的事情想复杂了。',
+    q47:'很多人开始注意那篇文章。',
+    q48:'这种方法能有效地减轻压力。'
+  };
+
+  function getUserAnswer(name) {
+    const radios = document.querySelectorAll(`input[name="${name}"]`);
+    if (radios.length && radios[0].type === 'radio') {
+      for (const r of radios) if (r.checked) return r.value;
+      return '';
+    }
+    const el = document.querySelector(`[name="${name}"]`);
+    return el ? el.value.trim().toUpperCase().replace(/\s+/g,'') : '';
+  }
+
+  function normalizeWriting(str) {
+    return str.replace(/[。．.！!？?，,、\s]/g,'').toLowerCase();
+  }
+
+  function grade() {
+    let correct = 0;
+    const total = 48;
+    const parts = {L1:0,L2:0,L3:0,R1:0,R2:0,R3:0,R4:0,W:0};
+    const partsMax = {L1:5,L2:7,L3:10,R1:4,R2:4,R3:4,R4:9,W:5};
+
+    document.querySelectorAll('.q').forEach(q => {
+      const name = q.querySelector('input')?.name;
+      if (!name) return;
+      const user = getUserAnswer(name);
+      const ans = answers[name];
+      const fb = q.querySelector('.feedback');
+      let ok = false;
+
+      if (name.startsWith('q4') && parseInt(name.slice(1)) >= 44) {
+        ok = normalizeWriting(user) === normalizeWriting(ans);
+      } else {
+        ok = user === ans;
+      }
+
+      q.classList.remove('correct','wrong');
+      if (user === '') {
+        fb.textContent = '';
+        fb.className = 'feedback';
+      } else if (ok) {
+        correct++;
+        q.classList.add('correct');
+        fb.textContent = '✓ 正确';
+        fb.className = 'feedback ok';
+        const p = q.dataset.part;
+        if (p) parts[p]++;
+      } else {
+        q.classList.add('wrong');
+        if (name.startsWith('q4') && parseInt(name.slice(1)) >= 44) {
+          fb.textContent = '✗ 参考答案：' + ans;
+        } else {
+          fb.textContent = '✗ 正确答案：' + ans;
+        }
+        fb.className = 'feedback err';
+      }
+    });
+
+    // hiện transcript sau khi chấm
+    document.getElementById('trans1').classList.add('show');
+    document.getElementById('trans2').classList.add('show');
+    document.getElementById('trans3').classList.add('show');
+
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
+    document.getElementById('totalScore').textContent = correct + ' / ' + total;
+
+    document.getElementById('scoreDetail').innerHTML = `
+      听力一 ${parts.L1}/${partsMax.L1}　
+      听力二 ${parts.L2}/${partsMax.L2}　
+      听力三 ${parts.L3}/${partsMax.L3}<br>
+      阅读一 ${parts.R1}/${partsMax.R1}　
+      阅读二 ${parts.R2}/${partsMax.R2}　
+      排序 ${parts.R3}/${partsMax.R3}　
+      阅读理解 ${parts.R4}/${partsMax.R4}<br>
+      书写 ${parts.W}/${partsMax.W}
+    `;
+
+    box.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  function resetAll() {
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    document.querySelectorAll('input[type=text], .blank-input, .order-input').forEach(i => i.value = '');
+    document.querySelectorAll('.q').forEach(q => {
+      q.classList.remove('correct','wrong');
+      const fb = q.querySelector('.feedback');
+      if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+    });
+    document.getElementById('trans1').classList.remove('show');
+    document.getElementById('trans2').classList.remove('show');
+    document.getElementById('trans3').classList.remove('show');
+    document.getElementById('resultBox').classList.remove('show');
+  }
+</script>
+</body>
+</html>
