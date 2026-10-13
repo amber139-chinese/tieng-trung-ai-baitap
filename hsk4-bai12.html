@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK 4 · 第十二课 用心发现世界 · 测试</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #0d47a1;
+      --success: #0f9d58;
+      --danger: #d93025;
+      --bg: #f0f2f5;
+      --card: #ffffff;
+      --text: #202124;
+      --border: #dadce0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 16px;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #1a73e8, #0d47a1);
+      color: white;
+      padding: 26px 30px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.65rem; margin-bottom: 4px; }
+    header p { opacity: 0.9; font-size: 0.95rem; }
+    .nav-tabs {
+      display: flex;
+      background: #e8f0fe;
+      overflow-x: auto;
+    }
+    .nav-tabs button {
+      flex: 1;
+      min-width: 110px;
+      padding: 13px 8px;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #555;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-tabs button.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: white;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section { padding: 24px 28px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary);
+    }
+    .part-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 20px 0 12px;
+      color: #333;
+    }
+    .audio-box {
+      background: #e8f0fe;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .audio-box audio { width: 100%; max-width: 400px; }
+    .audio-label { font-weight: 600; color: var(--primary-dark); min-width: 100px; }
+    .question {
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      background: #fafafa;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.25s;
+    }
+    .question.correct { border-left-color: var(--success); background: #e6f4ea; }
+    .question.wrong { border-left-color: var(--danger); background: #fce8e6; }
+    .question-num { font-weight: 700; color: var(--primary); margin-right: 4px; }
+    .options { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .option {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 7px 10px; border-radius: 6px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .option:hover { background: #e8f0fe; }
+    .option input { margin-top: 3px; transform: scale(1.15); }
+    .tf-options { display: flex; gap: 22px; margin-top: 8px; }
+    .tf-options label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 1.05rem; }
+    .word-bank {
+      background: #fff8e1;
+      padding: 11px 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 1.02rem;
+    }
+    .word-bank span {
+      display: inline-block;
+      background: white;
+      border: 1px solid #ffb74d;
+      padding: 3px 11px;
+      border-radius: 16px;
+      margin: 3px 5px 3px 0;
+      font-weight: 500;
+    }
+    .order-options p { margin: 5px 0; padding-left: 6px; }
+    .order-input {
+      width: 150px; padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: 6px; font-size: 1rem; text-align: center; letter-spacing: 2px;
+    }
+    .writing-words { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0; font-size: 1.02rem; }
+    .writing-words span { background: #e8f0fe; padding: 3px 9px; border-radius: 4px; }
+    .writing-answer {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border);
+      border-radius: 6px; font-size: 1.02rem; margin-top: 6px; font-family: inherit;
+    }
+    .example {
+      background: #e8f5e9;
+      border-left: 4px solid var(--success);
+      padding: 11px 14px;
+      margin-bottom: 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.93rem;
+    }
+    .passage {
+      background: #f5f5f5;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      line-height: 1.75;
+    }
+    .score-bar {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      border-top: 2px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+    .score-btn {
+      background: linear-gradient(135deg, #1a73e8, #0d47a1);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .score-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,115,232,0.4); }
+    .score-result {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: none;
+    }
+    .score-result.show { display: block; }
+    .transcript-box {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+    }
+    .transcript-box.show { display: block; }
+    .transcript-box h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .transcript-item {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #ccc;
+    }
+    .transcript-item:last-child { border-bottom: none; }
+    .transcript-q { font-weight: 600; color: #333; margin-bottom: 4px; }
+    .transcript-text { color: #444; font-size: 0.95rem; line-height: 1.65; }
+    .correct-ans {
+      display: none;
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: var(--success);
+      font-weight: 600;
+    }
+    .question.wrong .correct-ans,
+    .question.correct .correct-ans { display: block; }
+    footer {
+      text-align: center;
+      padding: 16px;
+      color: #666;
+      font-size: 0.88rem;
+      background: #f1f3f4;
+    }
+    select {
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    @media (max-width: 600px) {
+      body { padding: 8px; }
+      .section { padding: 16px 14px; }
+      header { padding: 18px 14px; }
+      header h1 { font-size: 1.3rem; }
+    }
+  
+    .explain {
+      display: none;
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1565c0;
+    }
+    .question.correct .explain,
+    .question.wrong .explain {
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>第十二课　用心发现世界</h1>
+      <p>HSK 4 标准教程 · 听力 + 阅读 + 书写 测试</p>
+    </header>
+
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showTab('listening')">一、听力</button>
+      <button class="tab-btn" onclick="showTab('reading')">二、阅读</button>
+      <button class="tab-btn" onclick="showTab('writing')">三、书写</button>
+    </div>
+
+    <!-- ========== 听力 ========== -->
+    <div id="listening" class="tab-content active">
+      <div class="section">
+        <div class="section-title">🎧 一、听力</div>
+
+        <!-- 第一部分 -->
+        <div class="part-title">第一部分　判断对错（第1-5题）　<span style="font-weight:400;font-size:0.9rem">12-1</span></div>
+        <div class="audio-box">
+          <span class="audio-label">音频 12-1</span>
+          <audio controls><source src="12-1.mp3" type="audio/mpeg">您的浏览器不支持音频。</audio>
+        </div>
+        <div class="example">
+          <strong>例如：</strong> 我想去办个信用卡，今天下午你有时间吗？陪我去一趟银行？<br>
+          ★ 他打算下午去银行。　（ √ ）
+        </div>
+        <div class="example">
+          现在我很少看电视……浪费我的时间。<br>
+          ★ 他喜欢看电视广告。　（ × ）
+        </div>
+
+        <div class="question" data-ans="×">
+          <span class="question-num">1.</span> ★ 他决定离开北京。
+          <div class="tf-options">
+            <label><input type="radio" name="q1" value="√"> √ 对</label>
+            <label><input type="radio" name="q1" value="×"> × 错</label>
+          </div>
+          <div class="correct-ans">正确答案：×</div>
+        </div>
+        <div class="question" data-ans="×">
+          <span class="question-num">2.</span> ★ 做计划一定要很详细。
+          <div class="tf-options">
+            <label><input type="radio" name="q2" value="√"> √ 对</label>
+            <label><input type="radio" name="q2" value="×"> × 错</label>
+          </div>
+          <div class="correct-ans">正确答案：×</div>
+        </div>
+        <div class="question" data-ans="√">
+          <span class="question-num">3.</span> ★ 他不想再乱买东西了。
+          <div class="tf-options">
+            <label><input type="radio" name="q3" value="√"> √ 对</label>
+            <label><input type="radio" name="q3" value="×"> × 错</label>
+          </div>
+          <div class="correct-ans">正确答案：√</div>
+        </div>
+        <div class="question" data-ans="×">
+          <span class="question-num">4.</span> ★ 现在人们更喜欢看报纸。
+          <div class="tf-options">
+            <label><input type="radio" name="q4" value="√"> √ 对</label>
+            <label><input type="radio" name="q4" value="×"> × 错</label>
+          </div>
+          <div class="correct-ans">正确答案：×</div>
+        </div>
+        <div class="question" data-ans="√">
+          <span class="question-num">5.</span> ★ 做事情方法很重要。
+          <div class="tf-options">
+            <label><input type="radio" name="q5" value="√"> √ 对</label>
+            <label><input type="radio" name="q5" value="×"> × 错</label>
+          </div>
+          <div class="correct-ans">正确答案：√</div>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="part-title">第二部分　选择题（第6-12题）　<span style="font-weight:400;font-size:0.9rem">12-2</span></div>
+        <div class="audio-box">
+          <span class="audio-label">音频 12-2</span>
+          <audio controls><source src="12-2.mp3" type="audio/mpeg">您的浏览器不支持音频。</audio>
+        </div>
+
+        <div class="question" data-ans="C">
+          <span class="question-num">6.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q6" value="A"> A 买了勺子</label>
+            <label class="option"><input type="radio" name="q6" value="B"> B 喜欢上网</label>
+            <label class="option"><input type="radio" name="q6" value="C"> C 力气很大</label>
+            <label class="option"><input type="radio" name="q6" value="D"> D 拿不动箱子</label>
+          </div>
+          <div class="correct-ans">正确答案：C</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">7.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q7" value="A"> A 还有机会赢</label>
+            <label class="option"><input type="radio" name="q7" value="B"> B 比赛结束了</label>
+            <label class="option"><input type="radio" name="q7" value="C"> C 男的进球了</label>
+            <label class="option"><input type="radio" name="q7" value="D"> D 那个球没进</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">8.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q8" value="A"> A 语言环境好</label>
+            <label class="option"><input type="radio" name="q8" value="B"> B 经济条件好</label>
+            <label class="option"><input type="radio" name="q8" value="C"> C 学习更认真</label>
+            <label class="option"><input type="radio" name="q8" value="D"> D 会一些外语</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+        </div>
+        <div class="question" data-ans="B">
+          <span class="question-num">9.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q9" value="A"> A 都是她的错</label>
+            <label class="option"><input type="radio" name="q9" value="B"> B 被误会了</label>
+            <label class="option"><input type="radio" name="q9" value="C"> C 不负责任</label>
+            <label class="option"><input type="radio" name="q9" value="D"> D 负责那件事</label>
+          </div>
+          <div class="correct-ans">正确答案：B</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">10.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q10" value="A"> A 刚刚搬走</label>
+            <label class="option"><input type="radio" name="q10" value="B"> B 有很多时间</label>
+            <label class="option"><input type="radio" name="q10" value="C"> C 喜欢逛街</label>
+            <label class="option"><input type="radio" name="q10" value="D"> D 不熟悉环境</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">11.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q11" value="A"> A 去北京饭店</label>
+            <label class="option"><input type="radio" name="q11" value="B"> B 参加会议</label>
+            <label class="option"><input type="radio" name="q11" value="C"> C 打几个电话</label>
+            <label class="option"><input type="radio" name="q11" value="D"> D 去学校找人</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">12.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q12" value="A"> A 应该努力赚钱</label>
+            <label class="option"><input type="radio" name="q12" value="B"> B 要过好的生活</label>
+            <label class="option"><input type="radio" name="q12" value="C"> C 不能随便花钱</label>
+            <label class="option"><input type="radio" name="q12" value="D"> D 时间才最重要</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="part-title">第三部分　选择题（第13-22题）　<span style="font-weight:400;font-size:0.9rem">12-3</span></div>
+        <div class="audio-box">
+          <span class="audio-label">音频 12-3</span>
+          <audio controls><source src="12-3.mp3" type="audio/mpeg">您的浏览器不支持音频。</audio>
+        </div>
+
+        <div class="question" data-ans="A">
+          <span class="question-num">13.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q13" value="A"> A 买了相机</label>
+            <label class="option"><input type="radio" name="q13" value="B"> B 相机不贵</label>
+            <label class="option"><input type="radio" name="q13" value="C"> C 没有说明书</label>
+            <label class="option"><input type="radio" name="q13" value="D"> D 正在照相</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">14.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q14" value="A"> A 律师</label>
+            <label class="option"><input type="radio" name="q14" value="B"> B 经理</label>
+            <label class="option"><input type="radio" name="q14" value="C"> C 老师</label>
+            <label class="option"><input type="radio" name="q14" value="D"> D 服务员</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">15.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q15" value="A"> A 明天七节课</label>
+            <label class="option"><input type="radio" name="q15" value="B"> B 九点下课</label>
+            <label class="option"><input type="radio" name="q15" value="C"> C 和男的一起上课</label>
+            <label class="option"><input type="radio" name="q15" value="D"> D 能参加招聘会</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">16.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q16" value="A"> A 律师</label>
+            <label class="option"><input type="radio" name="q16" value="B"> B 警察</label>
+            <label class="option"><input type="radio" name="q16" value="C"> C 教师</label>
+            <label class="option"><input type="radio" name="q16" value="D"> D 作家</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+        </div>
+        <div class="question" data-ans="D">
+          <span class="question-num">17.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q17" value="A"> A 喜欢猫</label>
+            <label class="option"><input type="radio" name="q17" value="B"> B 要找王明</label>
+            <label class="option"><input type="radio" name="q17" value="C"> C 爱开玩笑</label>
+            <label class="option"><input type="radio" name="q17" value="D"> D 觉得奇怪</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">18.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q18" value="A"> A 坐地铁</label>
+            <label class="option"><input type="radio" name="q18" value="B"> B 坐出租车</label>
+            <label class="option"><input type="radio" name="q18" value="C"> C 自己开车</label>
+            <label class="option"><input type="radio" name="q18" value="D"> D 坐公共汽车</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+        </div>
+        <div class="question" data-ans="C">
+          <span class="question-num">19.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q19" value="A"> A 说话少的</label>
+            <label class="option"><input type="radio" name="q19" value="B"> B 做事多的</label>
+            <label class="option"><input type="radio" name="q19" value="C"> C 会交流的</label>
+            <label class="option"><input type="radio" name="q19" value="D"> D 有想法的</label>
+          </div>
+          <div class="correct-ans">正确答案：C</div>
+        </div>
+        <div class="question" data-ans="B">
+          <span class="question-num">20.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q20" value="A"> A 同意</label>
+            <label class="option"><input type="radio" name="q20" value="B"> B 反对</label>
+            <label class="option"><input type="radio" name="q20" value="C"> C 支持</label>
+            <label class="option"><input type="radio" name="q20" value="D"> D 理解</label>
+          </div>
+          <div class="correct-ans">正确答案：B</div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">21.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q21" value="A"> A 常晚到</label>
+            <label class="option"><input type="radio" name="q21" value="B"> B 没戴手表</label>
+            <label class="option"><input type="radio" name="q21" value="C"> C 不喜欢开车</label>
+            <label class="option"><input type="radio" name="q21" value="D"> D 没来上班</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+        </div>
+        <div class="question" data-ans="C">
+          <span class="question-num">22.</span>
+          <div class="options">
+            <label class="option"><input type="radio" name="q22" value="A"> A 送司机新手表</label>
+            <label class="option"><input type="radio" name="q22" value="B"> B 相信司机的解释</label>
+            <label class="option"><input type="radio" name="q22" value="C"> C 司机不能再迟到</label>
+            <label class="option"><input type="radio" name="q22" value="D"> D 找新司机了</label>
+          </div>
+          <div class="correct-ans">正确答案：C</div>
+        </div>
+
+        <!-- Transcripts (hidden until scored) -->
+        <div id="transcripts" class="transcript-box">
+          <h3>📝 听力原文（Transcript）</h3>
+
+          <div class="transcript-item">
+            <div class="transcript-q">第1题</div>
+            <div class="transcript-text">我认真考虑了一个晚上，也打电话和父母商量过了，最后还是决定不去那家公司了。我想继续留在北京，看看还有没有别的机会。<br>★ 他决定离开北京。（×）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第2题</div>
+            <div class="transcript-text">不管做什么事情，提前做计划总是好的。每一步应该做什么、怎么做，不用安排得特别详细，但必须差不多有一个想法。<br>★ 做计划一定要很详细。（×）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第3题</div>
+            <div class="transcript-text">搬家时，我发现了很多以前买的却一次也没用过的东西。不要了吧，觉得可惜；留着吧，估计以后也用不到。我以后再也不乱买东西了。<br>★ 他不想再乱买东西了。（√）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第4题</div>
+            <div class="transcript-text">现在越来越多的人选择上网看新闻，因为这样很方便，而且能更及时地获得消息，网上的新闻内容也更详细、丰富。<br>★ 现在人们更喜欢看报纸。（×）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第5题</div>
+            <div class="transcript-text">无论做什么事都要注意方法，正确的方法可以帮我们节约时间。如果方法不对，可能花五倍甚至十倍的时间都不能完成任务。<br>★ 做事情方法很重要。（√）</div>
+          </div>
+
+          <div class="transcript-item">
+            <div class="transcript-q">第6题</div>
+            <div class="transcript-text">男：箱子里面放的是什么啊？要是再重一点儿，连我也拿不动了。<br>女：是我从网上买的盘子和勺子。咱们家就你力气大，你拿肯定没问题。<br>问：根据对话，可以知道男的怎样？（C 力气很大）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第7题</div>
+            <div class="transcript-text">男：真可惜，这个球差一点儿就踢进了。<br>女：是呀，还有不到一分钟时间，马上就结束了，看来没机会再赢球了。<br>问：根据对话，下列哪个正确？（D 那个球没进）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第8题</div>
+            <div class="transcript-text">男：怎样才能说一口流利的外语呢？<br>女：如果你会一点儿外语，并且有一定的经济条件，那么出国学习是最好的选择，因为语言环境对学习语言有很重要的作用。<br>问：女的觉得应该去国外学习外语是因为什么？（A 语言环境好）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第9题</div>
+            <div class="transcript-text">男：那件事情，我们一直以为都是李丽的错，但后来才发现，是我们误会她了。<br>女：是的，那件事不应该让她负全部的责任。<br>问：关于李丽，下列哪个正确？（B 被误会了）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第10题</div>
+            <div class="transcript-text">男：王红刚搬来没几天，这里熟人不多，也不太了解周围的环境，有时间你多陪她上街逛逛。<br>女：放心，我下午就带她出去走走。<br>问：关于王红，下列哪个正确？（D 不熟悉环境）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第11题</div>
+            <div class="transcript-text">男：这次会议地点改到北京饭店，你通知马教授了吗？<br>女：我都快为这事急死了，他的电话一直无法接通，下午我准备直接去学校告诉他。<br>问：女的下午可能做什么？（D 去学校找人）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第12题</div>
+            <div class="transcript-text">男：有了钱你想买什么就买什么，就能过自己想要的生活，我觉得金钱比其他的都重要。<br>女：我不这么认为。钱花光了可以再赚，可是一个人再怎么有钱，也买不到时间，时间才是无价的。<br>问：下列哪个是女的的看法？（D 时间才最重要）</div>
+          </div>
+
+          <div class="transcript-item">
+            <div class="transcript-q">第13题</div>
+            <div class="transcript-text">男：我今天用新买的相机照了几张相，你看，照片是不是不清楚？<br>女：这么贵的相机，怎么会呢？<br>男：也许是我对它不熟悉，还不太会用。<br>女：那你好好儿看看说明书，仔细研究一下吧。<br>问：关于男的，下列哪个正确？（A 买了相机）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第14题</div>
+            <div class="transcript-text">女：先生，这是您的房卡，请拿好。<br>男：谢谢！我的行李箱在哪儿取呢？<br>女：我们一会儿会直接送到您的房间。<br>男：谢谢！麻烦你们了。<br>女：不客气。<br>问：女的最可能是做什么的？（D 服务员）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第15题</div>
+            <div class="transcript-text">男：明天上午学校有个招聘会，你去不去？<br>女：我明早有一节课，估计赶不上。<br>男：招聘会十点开始，你几点下课？<br>女：九点五十，那我还来得及。<br>问：关于女的，下列哪个正确？（D 能参加招聘会）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第16题</div>
+            <div class="transcript-text">男：小李，听说你母亲是一位律师？<br>女：是啊。<br>男：真让人羡慕！我本来也想学法律专业的，可惜没考上。<br>女：其实干什么工作都一样，只要用心，都能干好。<br>问：男的以前想做什么职业？（A 律师）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第17题</div>
+            <div class="transcript-text">女：他不是叫“王明”吗？我怎么总听你们叫他“老猫”呢？<br>男：“老猫”是他的外号，因为他上课总爱睡觉，所以大家就给他起了这个名字。<br>女：他不会不高兴吗？<br>男：没关系，我们经常一起开玩笑，一般只在熟悉的人面前才这么叫他。<br>问：关于女的，下列哪个正确？（D 觉得奇怪）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第18题</div>
+            <div class="transcript-text">女：我们坐出租车去机场？<br>男：现在路上堵车，坐出租车去，我担心时间会来不及。<br>女：那怎么办？坐地铁去？<br>男：还有两个多小时，坐地铁应该来得及。<br>问：男的打算怎么去机场？（A 坐地铁）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第19-20题</div>
+            <div class="transcript-text">说话是最容易的事，也是最难的事。因此，有的人认为我们应该少说话多做事。实际上，这种想法也不对。相反，成功离不开交流，交流自然需要说话。会说话的人更容易交到朋友，也更容易获得成功。<br>
+            19. 什么样的人更容易交到朋友？（C 会交流的）<br>
+            20. 说话人对“少说话多做事”是什么态度？（B 反对）</div>
+          </div>
+          <div class="transcript-item">
+            <div class="transcript-q">第21-22题</div>
+            <div class="transcript-text">张经理和司机约好每天早上七点来接他上班，可是司机经常迟到。这天，司机又迟到了十几分钟，他感到很不好意思，所以向张经理解释说，他的手表又出问题了。张经理回答说：“你应该换一块儿表了，否则，我就要换一个司机了。”<br>
+            21. 关于司机，可以知道什么？（A 常晚到）<br>
+            22. 张经理的话是什么意思？（C 司机不能再迟到）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 阅读 ========== -->
+    <div id="reading" class="tab-content">
+      <div class="section">
+        <div class="section-title">📖 二、阅读</div>
+
+        <div class="part-title">第一部分　选词填空（第23-26题）</div>
+        <div class="word-bank">
+          <strong>词语：</strong>
+          <span>A 并且</span> <span>B 任务</span> <span>C 引起</span> <span>D 坚持</span> <span>E 也许</span>
+        </div>
+        <div class="example">例如：她每天都（ D ）走路上班，所以身体一直很不错。</div>
+
+        <div class="question" data-ans="E">
+          <span class="question-num">23.</span> 有些人朋友不多，（ 
+          <select name="q23"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）只有一两个，但他们永远能相互理解和支持。
+          <div class="correct-ans">正确答案：E</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Câu này nói về một số người chỉ có ít bạn (chỉ một hai người), nhưng những người bạn đó luôn hiểu và ủng hộ nhau.<br>
+      Từ <b>也许</b> (có lẽ / có thể) phù hợp nhất vì mang nghĩa “có thể chỉ có một hai người”.<br>
+      → Đáp án: <b>E 也许</b>
+    </div>
+        </div>
+        <div class="question" data-ans="C">
+          <span class="question-num">24.</span> 人与人之间如果缺少交流，很可能会（ 
+          <select name="q24"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）不小的误会。
+          <div class="correct-ans">正确答案：C</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Nếu thiếu giao tiếp giữa người với người, rất dễ <b>gây ra</b> hiểu lầm lớn.<br>
+      Từ <b>引起</b> nghĩa là “gây ra, dẫn đến” → hoàn toàn phù hợp.<br>
+      → Đáp án: <b>C 引起</b>
+    </div>
+        </div>
+        <div class="question" data-ans="B">
+          <span class="question-num">25.</span> 我的看法是这个（ 
+          <select name="q25"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）没有那么困难，关键是要清楚我们主要想做什么，找到最重要的问题。
+          <div class="correct-ans">正确答案：B</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      “Cái này” ở đây chỉ <b>nhiệm vụ / công việc</b> cần làm.<br>
+      Câu nói: theo tôi thì nhiệm vụ này không quá khó, quan trọng là phải rõ mình muốn làm gì.<br>
+      → Đáp án: <b>B 任务</b>
+    </div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">26.</span> 出门的时候，天气还很好。没想到半路上突然就下雨了，（ 
+          <select name="q26"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）越下越大，一点儿停的意思都没有。
+          <div class="correct-ans">正确答案：A</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Mưa không những không dừng mà còn ngày càng to hơn.<br>
+      Từ <b>并且</b> dùng để nối hai ý: mưa rồi <b>và</b> ngày càng to hơn.<br>
+      → Đáp án: <b>A 并且</b>
+    </div>
+        </div>
+
+        <div class="part-title">第二部分　选词填空（第27-30题）</div>
+        <div class="word-bank">
+          <strong>词语：</strong>
+          <span>A 规定</span> <span>B 商量</span> <span>C 温度</span> <span>D 意见</span> <span>E 力气</span>
+        </div>
+
+        <div class="question" data-ans="D">
+          <span class="question-num">27.</span><br>
+          A：这次遇到这么大的事情，我该怎么办呢？<br>
+          B：别担心，我叔叔是律师，这个问题他应该可以提供一些比较专业的（ 
+          <select name="q27"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ），我帮你问问，有消息我就告诉你。
+          <div class="correct-ans">正确答案：D</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      B nói chú của mình là luật sư, có thể đưa ra một số <b>ý kiến / lời khuyên</b> chuyên nghiệp.<br>
+      Từ <b>意见</b> nghĩa là “ý kiến, quan điểm” → đúng nhất.<br>
+      → Đáp án: <b>D 意见</b>
+    </div>
+        </div>
+        <div class="question" data-ans="A">
+          <span class="question-num">28.</span><br>
+          A：小张，你有什么意见？<br>
+          B：按照现在的情况，想要在（ 
+          <select name="q28"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）时间内完成计划，好像有点儿困难。
+          <div class="correct-ans">正确答案：A</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      “Trong thời gian <b>quy định</b>” nghĩa là trong thời hạn đã đặt ra.<br>
+      Từ <b>规定</b> nghĩa là “quy định, quy tắc” → phù hợp.<br>
+      → Đáp án: <b>A 规定</b>
+    </div>
+        </div>
+        <div class="question" data-ans="B">
+          <span class="question-num">29.</span><br>
+          A：上次我跟你说的那件事，你跟你丈夫详细谈了吗？<br>
+          B：还没跟他（ 
+          <select name="q29"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）呢，他最近在忙公司的事情，过几天再说吧。
+          <div class="correct-ans">正确答案：B</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      “Chưa bàn bạc / trao đổi với chồng” về chuyện đó.<br>
+      Từ <b>商量</b> nghĩa là “bàn bạc, thảo luận” → đúng.<br>
+      → Đáp án: <b>B 商量</b>
+    </div>
+        </div>
+        <div class="question" data-ans="E">
+          <span class="question-num">30.</span><br>
+          A：爷爷您年龄大了，以后搬东西这些事情您别做了，就交给我们吧。<br>
+          B：你们放心，我身体很好，还有（ 
+          <select name="q30"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>
+          ）搬。
+          <div class="correct-ans">正确答案：E</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Ông nội nói mình vẫn còn <b>sức lực</b> để bê đồ.<br>
+      Từ <b>力气</b> nghĩa là “sức lực, sức khỏe” → hoàn toàn phù hợp.<br>
+      → Đáp án: <b>E 力气</b>
+    </div>
+        </div>
+
+        <div class="part-title">第三部分　排列顺序（第31-34题）</div>
+        <div class="example">例如：B 平时我骑自行车上下班　A 可是今天起晚了　C 所以就打车来公司　→ <strong>B A C</strong></div>
+
+        <div class="question" data-ans="BCA">
+          <span class="question-num">31.</span>
+          <div class="order-options">
+            <p>A 这种事情一直在发生，谁也不能改变</p>
+            <p>B 地球上每分钟都有新的生命出现</p>
+            <p>C 也有老的生命死去</p>
+            <input type="text" class="order-input" name="q31" placeholder="请输入顺序（如 BAC）">
+          </div>
+          <div class="correct-ans">正确答案：BCA</div>
+    <div class="explain">
+      <strong>📚 Giải thích thứ tự:</strong><br>
+      B → C → A<br>
+      Trên Trái Đất mỗi phút đều có sự sống mới xuất hiện (B), <b>cũng có</b> sự sống già chết đi (C). Việc này luôn xảy ra, không ai thay đổi được (A).<br>
+      Logic: nói hiện tượng → nói thêm hiện tượng đối lập → kết luận.
+    </div>
+        </div>
+        <div class="question" data-ans="CAB">
+          <span class="question-num">32.</span>
+          <div class="order-options">
+            <p>A 很多人以为误会是小事，不去解决它</p>
+            <p>B 其实相反，误会需要我们及时解释清楚</p>
+            <p>C 两个人在一起，总会出现一些误会</p>
+            <input type="text" class="order-input" name="q32" placeholder="请输入顺序（如 BAC）">
+          </div>
+          <div class="correct-ans">正确答案：CAB</div>
+    <div class="explain">
+      <strong>📚 Giải thích thứ tự:</strong><br>
+      C → A → B<br>
+      Hai người ở cùng nhau thì luôn có hiểu lầm (C). Nhiều người nghĩ hiểu lầm là chuyện nhỏ nên không giải quyết (A). <b>Thực ra ngược lại</b>, cần giải thích rõ ngay (B).<br>
+      Logic: nêu vấn đề → quan điểm sai → quan điểm đúng.
+    </div>
+        </div>
+        <div class="question" data-ans="ACB">
+          <span class="question-num">33.</span>
+          <div class="order-options">
+            <p>A 以上就是我们这次啤酒节的活动内容</p>
+            <p>B 对于这个活动安排，我们可以一起商量</p>
+            <p>C 大家还有什么好的主意或意见尽管提</p>
+            <input type="text" class="order-input" name="q33" placeholder="请输入顺序（如 BAC）">
+          </div>
+          <div class="correct-ans">正确答案：ACB</div>
+    <div class="explain">
+      <strong>📚 Giải thích thứ tự:</strong><br>
+      A → C → B<br>
+      Trên đây là nội dung hoạt động lễ hội bia lần này (A). Mọi người còn ý kiến gì thì cứ nói (C). Về việc sắp xếp hoạt động, chúng ta có thể cùng bàn bạc (B).<br>
+      Logic: giới thiệu nội dung → mời góp ý → mời thảo luận.
+    </div>
+        </div>
+        <div class="question" data-ans="ACB">
+          <span class="question-num">34.</span>
+          <div class="order-options">
+            <p>A 人们常说“友谊地久天长”</p>
+            <p>B 能够一直继续下去，直到永远</p>
+            <p>C 意思是希望友好关系</p>
+            <input type="text" class="order-input" name="q34" placeholder="请输入顺序（如 BAC）">
+          </div>
+          <div class="correct-ans">正确答案：ACB</div>
+    <div class="explain">
+      <strong>📚 Giải thích thứ tự:</strong><br>
+      A → C → B<br>
+      Người ta thường nói “tình bạn bền lâu” (A). Ý nghĩa là hy vọng quan hệ thân thiện (C) có thể tiếp tục mãi mãi (B).<br>
+      Logic: nêu câu nói → giải thích nghĩa → giải thích thêm.
+    </div>
+        </div>
+
+        <div class="part-title">阅读理解（第35-43题）</div>
+
+        <div class="question" data-ans="A">
+          <div class="passage">35. 有些故事，不光能给人带来快乐，还有教育的作用，能使人们在笑过之后重新认识一些问题。</div>
+          ★ 这段话主要讲故事的：
+          <div class="options">
+            <label class="option"><input type="radio" name="q35" value="A"> A 作用</label>
+            <label class="option"><input type="radio" name="q35" value="B"> B 能力</label>
+            <label class="option"><input type="radio" name="q35" value="C"> C 关键</label>
+            <label class="option"><input type="radio" name="q35" value="D"> D 历史</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Đoạn văn nói chuyện kể không chỉ mang lại niềm vui mà còn có <b>tác dụng giáo dục</b>, giúp người ta nhận ra vấn đề sau khi cười.<br>
+      → Chủ đề chính là <b>作用</b> (tác dụng).<br>
+      Đáp án: <b>A</b>
+    </div>
+        </div>
+        <div class="question" data-ans="A">
+          <div class="passage">36. 这座楼一共有28层，为了节约您的时间，1号和2号电梯最高只能到16层；3号、4号电梯17层以下不停，直接到17-28层，如果您要到1-16层，请坐西边的1号和2号电梯。</div>
+          ★ 1号电梯可以去哪一层？
+          <div class="options">
+            <label class="option"><input type="radio" name="q36" value="A"> A 16</label>
+            <label class="option"><input type="radio" name="q36" value="B"> B 17</label>
+            <label class="option"><input type="radio" name="q36" value="C"> C 18</label>
+            <label class="option"><input type="radio" name="q36" value="D"> D 19</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Thang máy số 1 và 2 chỉ lên đến tầng 16 là cao nhất.<br>
+      Vậy thang máy số 1 có thể đến tầng <b>16</b>.<br>
+      Đáp án: <b>A</b>
+    </div>
+        </div>
+        <div class="question" data-ans="C">
+          <div class="passage">37. 按照经验，人们往往认为夏天应该多穿白色衣服。但有研究证明，其实穿红色的更好。因为红色能更好地保护皮肤。</div>
+          ★ 根据这段话，可以知道：
+          <div class="options">
+            <label class="option"><input type="radio" name="q37" value="A"> A 红色更好看</label>
+            <label class="option"><input type="radio" name="q37" value="B"> B 白色对皮肤好</label>
+            <label class="option"><input type="radio" name="q37" value="C"> C 经验有时不对</label>
+            <label class="option"><input type="radio" name="q37" value="D"> D 应该研究问题</label>
+          </div>
+          <div class="correct-ans">正确答案：C</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Theo kinh nghiệm người ta nghĩ mùa hè nên mặc trắng, nhưng nghiên cứu chứng minh mặc đỏ tốt hơn.<br>
+      → Kinh nghiệm đôi khi <b>không đúng</b>.<br>
+      Đáp án: <b>C</b>
+    </div>
+        </div>
+        <div class="question" data-ans="D">
+          <div class="passage">38. 很多自行车后面都有一个灯，虽然小，但用处却很大。每当后面汽车的灯光照到它时，它就会反光，这样就能提醒司机前方有人。</div>
+          ★ 自行车后灯可以：
+          <div class="options">
+            <label class="option"><input type="radio" name="q38" value="A"> A 让人骑得更快</label>
+            <label class="option"><input type="radio" name="q38" value="B"> B 让堵车情况变少</label>
+            <label class="option"><input type="radio" name="q38" value="C"> C 节约用电</label>
+            <label class="option"><input type="radio" name="q38" value="D"> D 引起司机注意</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Đèn phía sau xe đạp phản chiếu ánh sáng xe ô tô, nhắc nhở tài xế phía trước có người.<br>
+      → Có thể <b>gây sự chú ý của tài xế</b>.<br>
+      Đáp án: <b>D</b>
+    </div>
+        </div>
+        <div class="question" data-ans="C">
+          <div class="passage">39. 三叶草的叶子一般为三个，但有时也会出现4个叶子的，这种4个叶子的叫“四叶草”，因为很少见，所以有人说，找到这种“四叶草”的人会得到幸福。</div>
+          ★ 四叶草：
+          <div class="options">
+            <label class="option"><input type="radio" name="q39" value="A"> A 很香</label>
+            <label class="option"><input type="radio" name="q39" value="B"> B 非常矮</label>
+            <label class="option"><input type="radio" name="q39" value="C"> C 不常见</label>
+            <label class="option"><input type="radio" name="q39" value="D"> D 表示友谊</label>
+          </div>
+          <div class="correct-ans">正确答案：C</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Cỏ 4 lá rất ít gặp (很少见), nên người ta nói ai tìm được sẽ hạnh phúc.<br>
+      → Đặc điểm chính là <b>không phổ biến / hiếm</b>.<br>
+      Đáp án: <b>C</b>
+    </div>
+        </div>
+        <div class="question" data-ans="D">
+          <div class="passage"><strong>40-41.</strong><br>
+            回忆人人都有，是生活中不可缺少的，但我们不能总是活在回忆里，尤其不能总是想着那些不愉快的回忆。过去发生的已经不能改变，重要的是现在。所以，我们应该认真做好眼前的事，这样才能走好以后的路。</div>
+          ★ 关于回忆，下列哪个正确？
+          <div class="options">
+            <label class="option"><input type="radio" name="q40" value="A"> A 常被忘记</label>
+            <label class="option"><input type="radio" name="q40" value="B"> B 使人后悔</label>
+            <label class="option"><input type="radio" name="q40" value="C"> C 让人烦恼</label>
+            <label class="option"><input type="radio" name="q40" value="D"> D 大家都有</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Câu đầu tiên: “Ký ức ai cũng có” (回忆人人都有).<br>
+      → Đáp án đúng là <b>大家都有</b>.<br>
+      Đáp án: <b>D</b>
+    </div>
+        </div>
+        <div class="question" data-ans="A">
+          ★ 根据这段话，我们应该：
+          <div class="options">
+            <label class="option"><input type="radio" name="q41" value="A"> A 做好现在的事</label>
+            <label class="option"><input type="radio" name="q41" value="B"> B 经常总结过去</label>
+            <label class="option"><input type="radio" name="q41" value="C"> C 认真帮助别人</label>
+            <label class="option"><input type="radio" name="q41" value="D"> D 努力改变过去</label>
+          </div>
+          <div class="correct-ans">正确答案：A</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Đoạn văn nhấn mạnh: quá khứ không thay đổi được, quan trọng là hiện tại. Chúng ta nên làm tốt việc trước mắt.<br>
+      → <b>Làm tốt việc hiện tại</b>.<br>
+      Đáp án: <b>A</b>
+    </div>
+        </div>
+        <div class="question" data-ans="D">
+          <div class="passage"><strong>42-43.</strong><br>
+            有个人总是买最大号的鞋子穿，别人问他，他就会回答：“商店里的大鞋小鞋是一样的价格，为什么不买大的呢？”然而他却忘记了一点，不合脚的鞋子会让他一生都不舒服。其实，不管什么，适合自己的才是最好的。</div>
+          ★ 那个人：
+          <div class="options">
+            <label class="option"><input type="radio" name="q42" value="A"> A 脚很大</label>
+            <label class="option"><input type="radio" name="q42" value="B"> B 讨厌穿鞋</label>
+            <label class="option"><input type="radio" name="q42" value="C"> C 很聪明</label>
+            <label class="option"><input type="radio" name="q42" value="D"> D 总穿大号的鞋</label>
+          </div>
+          <div class="correct-ans">正确答案：D</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Người đó luôn mua giày cỡ lớn nhất để đi.<br>
+      → Anh ta <b>luôn đi giày cỡ lớn</b>.<br>
+      Đáp án: <b>D</b>
+    </div>
+        </div>
+        <div class="question" data-ans="B">
+          ★ 这段话主要告诉我们什么？
+          <div class="options">
+            <label class="option"><input type="radio" name="q43" value="A"> A 不能粗心</label>
+            <label class="option"><input type="radio" name="q43" value="B"> B 合适最重要</label>
+            <label class="option"><input type="radio" name="q43" value="C"> C 要学会拒绝</label>
+            <label class="option"><input type="radio" name="q43" value="D"> D 要养成好习惯</label>
+          </div>
+          <div class="correct-ans">正确答案：B</div>
+    <div class="explain">
+      <strong>📚 Giải thích:</strong><br>
+      Bài học cuối cùng: “Dù là gì, cái phù hợp với mình mới là tốt nhất”.<br>
+      → <b>Phù hợp mới quan trọng nhất</b>.<br>
+      Đáp án: <b>B</b>
+    </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 书写 ========== -->
+    <div id="writing" class="tab-content">
+      <div class="section">
+        <div class="section-title">✍️ 三、书写</div>
+        <div class="part-title">完成句子（第44-48题）</div>
+        <div class="example">例如：那座桥　800年的　历史　有　了　→ 那座桥有800年的历史了。</div>
+
+        <div class="question" data-ans="对于这件事，他们的看法完全相反。">
+          <span class="question-num">44.</span>
+          <div class="writing-words"><span>这件事</span><span>他们</span><span>看法</span><span>完全相反</span><span>的</span><span>对于</span></div>
+          <input type="text" class="writing-answer" name="q44" placeholder="请把词语排成正确的句子">
+          <div class="correct-ans">正确答案：对于这件事，他们的看法完全相反。</div>
+    <div class="explain">
+      <strong>📚 Giải thích câu:</strong><br>
+      Cấu trúc: <b>对于 + sự việc + ，主语 + 的看法 + 完全相反</b><br>
+      “Đối với chuyện này, quan điểm của họ hoàn toàn trái ngược.”<br>
+      → 对于这件事，他们的看法完全相反。
+    </div>
+        </div>
+        <div class="question" data-ans="树上的叶子已经掉光了。">
+          <span class="question-num">45.</span>
+          <div class="writing-words"><span>叶子</span><span>光</span><span>掉</span><span>树上的</span><span>已经</span><span>了</span></div>
+          <input type="text" class="writing-answer" name="q45" placeholder="请把词语排成正确的句子">
+          <div class="correct-ans">正确答案：树上的叶子已经掉光了。</div>
+    <div class="explain">
+      <strong>📚 Giải thích câu:</strong><br>
+      Cấu trúc: <b>主语 + 已经 + 动词 + 补语 + 了</b><br>
+      “Lá trên cây đã rụng hết rồi.”<br>
+      → 树上的叶子已经掉光了。
+    </div>
+        </div>
+        <div class="question" data-ans="网上的一条消息引起了警察的注意。">
+          <span class="question-num">46.</span>
+          <div class="writing-words"><span>注意</span><span>警察的</span><span>一条消息</span><span>引起</span><span>网上的</span><span>了</span></div>
+          <input type="text" class="writing-answer" name="q46" placeholder="请把词语排成正确的句子">
+          <div class="correct-ans">正确答案：网上的一条消息引起了警察的注意。</div>
+    <div class="explain">
+      <strong>📚 Giải thích câu:</strong><br>
+      Cấu trúc: <b>主语 + 引起了 + 宾语</b><br>
+      “Một tin trên mạng đã gây sự chú ý của cảnh sát.”<br>
+      → 网上的一条消息引起了警察的注意。
+    </div>
+        </div>
+        <div class="question" data-ans="今天做的菜盐放多了。">
+          <span class="question-num">47.</span>
+          <div class="writing-words"><span>做的</span><span>今天</span><span>菜</span><span>放</span><span>盐</span><span>多了</span></div>
+          <input type="text" class="writing-answer" name="q47" placeholder="请把词语排成正确的句子">
+          <div class="correct-ans">正确答案：今天做的菜盐放多了。</div>
+    <div class="explain">
+      <strong>📚 Giải thích câu:</strong><br>
+      Cấu trúc: <b>时间 + 做的菜 + 盐 + 放多了</b><br>
+      “Món ăn hôm nay cho muối nhiều quá.”<br>
+      → 今天做的菜盐放多了。
+    </div>
+        </div>
+        <div class="question" data-ans="他对我的态度非常友好。">
+          <span class="question-num">48.</span>
+          <div class="writing-words"><span>他</span><span>态度</span><span>对</span><span>友好</span><span>非常</span><span>我的</span></div>
+          <input type="text" class="writing-answer" name="q48" placeholder="请把词语排成正确的句子">
+          <div class="correct-ans">正确答案：他对我的态度非常友好。</div>
+    <div class="explain">
+      <strong>📚 Giải thích câu:</strong><br>
+      Cấu trúc: <b>主语 + 对 + 宾语 + 的态度 + 非常 + 形容词</b><br>
+      “Thái độ của anh ấy đối với tôi rất thân thiện.”<br>
+      → 他对我的态度非常友好。
+    </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-bar">
+      <button class="score-btn" onclick="gradeTest()">✅ 交卷并自动评分</button>
+      <div class="score-result" id="scoreResult"></div>
+    </div>
+
+    <footer>
+      HSK 4 · 第十二课测试　|　请把本文件与 12-1.mp3、12-2.mp3、12-3.mp3 放在同一文件夹后使用
+    </footer>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    function normalize(str) {
+      return (str || '').replace(/\s+/g, '').replace(/[。！？，、；：""'']/g, '').toLowerCase();
+    }
+
+    function gradeTest() {
+      let total = 0, correct = 0;
+      const questions = document.querySelectorAll('.question[data-ans]');
+
+      questions.forEach(q => {
+        const ans = q.dataset.ans.trim();
+        let userAns = '';
+        const radio = q.querySelector('input[type="radio"]:checked');
+        const select = q.querySelector('select');
+        const textInput = q.querySelector('input[type="text"], .writing-answer, .order-input');
+
+        if (radio) userAns = radio.value;
+        else if (select) userAns = select.value;
+        else if (textInput) userAns = textInput.value.trim();
+
+        total++;
+        q.classList.remove('correct', 'wrong');
+
+        if (q.querySelector('.writing-answer') || q.querySelector('.order-input')) {
+          if (normalize(userAns) === normalize(ans) || normalize(userAns).includes(normalize(ans).slice(0, 8))) {
+            correct++;
+            q.classList.add('correct');
+          } else {
+            q.classList.add('wrong');
+          }
+        } else {
+          if (userAns === ans) {
+            correct++;
+            q.classList.add('correct');
+          } else {
+            q.classList.add('wrong');
+          }
+        }
+      });
+
+      const percent = Math.round((correct / total) * 100);
+      const resultEl = document.getElementById('scoreResult');
+      resultEl.classList.add('show');
+      resultEl.innerHTML = '得分：<span style="color:' + (percent>=80?'#0f9d58':percent>=60?'#f9a825':'#d93025') + '">' + correct + ' / ' + total + '</span>　（' + percent + '%）';
+
+      document.getElementById('transcripts').classList.add('show');
+      document.getElementById('listening').scrollIntoView({ behavior: 'smooth' });
+      alert('评分完成！\\n正确：' + correct + ' 题\\n错误：' + (total - correct) + ' 题\\n正确率：' + percent + '%\\n\\n听力原文已显示在听力部分底部。');
+    }
+  </script>
+</body>
+</html>
